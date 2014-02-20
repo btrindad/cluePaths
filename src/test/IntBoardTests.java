@@ -31,14 +31,68 @@ public class IntBoardTests {
 
 		
 	}*/
-	@SuppressWarnings("deprecation")
 	@Test
-	public void testAdjacencyLists()
+	public void testAdjacencyLists0()
 	{
 		ArrayList testList = testBoard.getAdjList(0);
 		Assert.assertTrue(testList.contains(1));
 		Assert.assertTrue(testList.contains(4));
 		Assert.assertEquals(2, testList.size());
+	}
+	
+	@Test 
+	public void testAdjacencyLists15()
+	{
+		int[] expected = {14,11};
+		ArrayList testList = testBoard.getAdjList(15);
+		for(int i : expected){
+			Assert.assertTrue(testList.contains(i));
+		}
+		Assert.assertEquals(expected.length, testList.size());
+	}
+	
+	@Test 
+	public void testAdjacencyLists11()
+	{
+		int[] expected = {10,7,15};
+		ArrayList testList = testBoard.getAdjList(15);
+		for(int i : expected){
+			Assert.assertTrue(testList.contains(i));
+		}
+		Assert.assertEquals(expected.length, testList.size());
+	}
+	
+	@Test 
+	public void testAdjacencyLists4()
+	{
+		int[] expected = {5,0,8};
+		ArrayList testList = testBoard.getAdjList(15);
+		for(int i : expected){
+			Assert.assertTrue(testList.contains(i));
+		}
+		Assert.assertEquals(expected.length, testList.size());
+	}
+	
+	@Test 
+	public void testAdjacencyLists9()
+	{
+		int[] expected = {8,5,13,10};
+		ArrayList testList = testBoard.getAdjList(15);
+		for(int i : expected){
+			Assert.assertTrue(testList.contains(i));
+		}
+		Assert.assertEquals(expected.length, testList.size());
+	}
+	
+	@Test 
+	public void testAdjacencyLists6()
+	{
+		int[] expected = {10,5,7,2};
+		ArrayList testList = testBoard.getAdjList(15);
+		for(int i : expected){
+			Assert.assertTrue(testList.contains(i));
+		}
+		Assert.assertEquals(expected.length, testList.size());
 	}
 	
 	@Test
