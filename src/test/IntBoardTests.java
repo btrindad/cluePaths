@@ -1,36 +1,20 @@
 package test;
 
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-
 import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import board.IntBoard;
-
 
 public class IntBoardTests {
 	IntBoard testBoard;
-	
+
 	@Before
 	public void setupBoard() {
 		testBoard = new IntBoard();
 	}
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-		
-	}
-	
-	/*@Test
-	public void testAdjacencyLists() {
-
-		
-	}*/
 	@Test
 	public void testAdjacencyLists0()
 	{
@@ -39,7 +23,7 @@ public class IntBoardTests {
 		Assert.assertTrue(testList.contains(4));
 		Assert.assertEquals(2, testList.size());
 	}
-	
+
 	@Test 
 	public void testAdjacencyLists15()
 	{
@@ -50,7 +34,7 @@ public class IntBoardTests {
 		}
 		Assert.assertEquals(expected.length, testList.size());
 	}
-	
+
 	@Test 
 	public void testAdjacencyLists11()
 	{
@@ -61,7 +45,7 @@ public class IntBoardTests {
 		}
 		Assert.assertEquals(expected.length, testList.size());
 	}
-	
+
 	@Test 
 	public void testAdjacencyLists4()
 	{
@@ -72,7 +56,7 @@ public class IntBoardTests {
 		}
 		Assert.assertEquals(expected.length, testList.size());
 	}
-	
+
 	@Test 
 	public void testAdjacencyLists9()
 	{
@@ -83,7 +67,7 @@ public class IntBoardTests {
 		}
 		Assert.assertEquals(expected.length, testList.size());
 	}
-	
+
 	@Test 
 	public void testAdjacencyLists6()
 	{
@@ -94,7 +78,7 @@ public class IntBoardTests {
 		}
 		Assert.assertEquals(expected.length, testList.size());
 	}
-	
+
 	@Test
 	public void testCalcIndex() {
 		int expected = 0;
@@ -106,9 +90,8 @@ public class IntBoardTests {
 		expected = 7;
 		actual = IntBoard.calcIndex(1, 3);
 		Assert.assertEquals(expected, actual);
-		
 	}
-	
+
 	@Test
 	public void testCalcTargets0_1() {
 		ArrayList<Integer> expected = new ArrayList();
@@ -117,7 +100,7 @@ public class IntBoardTests {
 		ArrayList<Integer> actual = IntBoard.calcTargets(0, 1);
 		Assert.assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void testCalcTargets13_2() {
 		ArrayList<Integer> expected = new ArrayList();
@@ -128,7 +111,7 @@ public class IntBoardTests {
 		ArrayList<Integer> actual = IntBoard.calcTargets(13, 2);
 		Assert.assertEquals(expected, actual);	
 	}
-	
+
 	@Test
 	public void testCalcTargets8_3() {
 		ArrayList<Integer> expected = new ArrayList();
@@ -139,7 +122,7 @@ public class IntBoardTests {
 		ArrayList<Integer> actual = IntBoard.calcTargets(8, 3);
 		Assert.assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void testCalcTargets15_2() {
 		ArrayList<Integer> expected = new ArrayList();
@@ -149,7 +132,7 @@ public class IntBoardTests {
 		ArrayList<Integer> actual = IntBoard.calcTargets(15, 2);
 		Assert.assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void testCalcTargets6_1() {
 		ArrayList<Integer> expected = new ArrayList();
@@ -160,7 +143,7 @@ public class IntBoardTests {
 		ArrayList<Integer> actual = IntBoard.calcTargets(6, 1);
 		Assert.assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void testCalcTargets9_2() {
 		ArrayList<Integer> expected = new ArrayList();
@@ -173,10 +156,4 @@ public class IntBoardTests {
 		ArrayList<Integer> actual = IntBoard.calcTargets(9, 2);
 		Assert.assertEquals(expected, actual);
 	}
-	
-	
-	
-	
-	
-
 }
