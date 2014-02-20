@@ -31,12 +31,13 @@ public class IntBoardTests {
 
 		
 	}*/
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testAdjacencyLists()
 	{
 		ArrayList testList = testBoard.getAdjList(0);
-		Assert.assertTrue(testList.contains(4));
 		Assert.assertTrue(testList.contains(1));
+		Assert.assertTrue(testList.contains(4));
 		Assert.assertEquals(2, testList.size());
 	}
 	

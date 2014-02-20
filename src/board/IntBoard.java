@@ -30,8 +30,10 @@ public class IntBoard {
 		return null;
 	}
 	
+	//added filler so test fails instead of returning a null pointer exception
 	public ArrayList<Integer> getAdjList(int cell) {
-		return null;
+		ArrayList<Integer> test = new ArrayList();
+		return test;
 	}
 	
 	public static int calcIndex(int row, int column) {
