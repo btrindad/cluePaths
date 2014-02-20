@@ -56,22 +56,73 @@ public class IntBoardTests {
 	}
 	
 	@Test
-	public void testCalcTargets() {
+	public void testCalcTargets0_1() {
 		ArrayList<Integer> expected = new ArrayList();
 		expected.add(1);
 		expected.add(4);
 		ArrayList<Integer> actual = IntBoard.calcTargets(0, 1);
 		Assert.assertEquals(expected, actual);
-		
-		expected.clear();
+	}
+	
+	@Test
+	public void testCalcTargets13_2() {
+		ArrayList<Integer> expected = new ArrayList();
 		expected.add(8);
 		expected.add(5);
 		expected.add(10);
 		expected.add(15);
-		actual = IntBoard.calcTargets(13, 2);
-		Assert.assertEquals(expected, actual);
-		
-		
+		ArrayList<Integer> actual = IntBoard.calcTargets(13, 2);
+		Assert.assertEquals(expected, actual);	
 	}
+	
+	@Test
+	public void testCalcTargets8_3() {
+		ArrayList<Integer> expected = new ArrayList();
+		expected.add(14);
+		expected.add(11);
+		expected.add(6);
+		expected.add(1);
+		ArrayList<Integer> actual = IntBoard.calcTargets(8, 3);
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testCalcTargets15_2() {
+		ArrayList<Integer> expected = new ArrayList();
+		expected.add(13);
+		expected.add(10);
+		expected.add(7);
+		ArrayList<Integer> actual = IntBoard.calcTargets(15, 2);
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testCalcTargets6_1() {
+		ArrayList<Integer> expected = new ArrayList();
+		expected.add(5);
+		expected.add(10);
+		expected.add(7);
+		expected.add(2);
+		ArrayList<Integer> actual = IntBoard.calcTargets(6, 1);
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testCalcTargets9_2() {
+		ArrayList<Integer> expected = new ArrayList();
+		expected.add(4);
+		expected.add(12);
+		expected.add(14);
+		expected.add(11);
+		expected.add(6);
+		expected.add(1);
+		ArrayList<Integer> actual = IntBoard.calcTargets(9, 2);
+		Assert.assertEquals(expected, actual);
+	}
+	
+	
+	
+	
+	
 
 }
