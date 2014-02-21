@@ -37,7 +37,7 @@ public class IntBoard {
 	}
 	
 	public static int calcIndex(int row, int column) {
-		return 0;
+		return ((4*row) + column);
 	}
 	
 }
