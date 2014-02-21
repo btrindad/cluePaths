@@ -21,22 +21,26 @@ public class IntBoard {
 		
 	}
 	
+	//wrapper class for target calculation logic
 	public void startTargets(int location, int steps) {
 		ArrayList targets = new ArrayList<Integer>();
+		calcTargets(location, Math.abs(steps), targets);
 	}
 	
+	//recursive function to find all targets for a given location.
 	public static void calcTargets(int location, int steps, ArrayList<Integer> targets){
 		visited[location] = true;
-		if(steps == 1){
+		if(steps == 0){
 			targets.add(location);
 		}
 		else{
-			for(int adj : adjMap.get(location)){
-				calcTargets(adj, steps--, targets);
+			for(int adj : getAdjList(location)){
+				if(!visited[adj]){
+					calcTargets(adj, steps--, targets);
+				}
 			}
 		}
 		visited[location] = false;
-		return;
 	}
 	
 	public Set<Integer> getTargets() {
@@ -44,7 +48,7 @@ public class IntBoard {
 	}
 	
 	//added filler so test fails instead of returning a null pointer exception
-	public ArrayList<Integer> getAdjList(int cell) {
+	public static ArrayList<Integer> getAdjList(int cell) {
 		ArrayList<Integer> test = new ArrayList();
 		return test;
 	}
