@@ -1,15 +1,19 @@
 package test;
 
 import static org.junit.Assert.*;
-import java.util.ArrayList;
+
+import java.util.*;
+
 import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import board.IntBoard;
 
 public class IntBoardTests {
 	IntBoard testBoard;
-	ArrayList<Integer> testTargets;
+	Set<Integer> testTargets;
 
 	@Before
 	public void setupBoard() {
@@ -18,7 +22,7 @@ public class IntBoardTests {
 	
 	@Before
 	public void setUpTargets(){
-		testTargets = new ArrayList<Integer>();
+		testTargets = new HashSet<Integer>();
 	}
 
 	@Test
@@ -100,8 +104,7 @@ public class IntBoardTests {
 
 	@Test
 	public void testCalcTargets0_1() {
-		ArrayList<Integer> expected = new ArrayList();
-		expected.add(1);
+		Set<Integer> expected = new HashSet<Integer>();		expected.add(1);
 		expected.add(4);
 		IntBoard.calcTargets(0, 1, testTargets);
 		Assert.assertTrue(testTargets.size() > 0);
@@ -110,7 +113,7 @@ public class IntBoardTests {
 
 	@Test
 	public void testCalcTargets13_2() {
-		ArrayList<Integer> expected = new ArrayList();
+		Set<Integer> expected = new HashSet<Integer>();
 		expected.add(8);
 		expected.add(5);
 		expected.add(10);
@@ -122,7 +125,7 @@ public class IntBoardTests {
 
 	@Test
 	public void testCalcTargets8_3() {
-		ArrayList<Integer> expected = new ArrayList();
+		Set<Integer> expected = new HashSet<Integer>();
 		expected.add(14);
 		expected.add(11);
 		expected.add(6);
@@ -134,7 +137,7 @@ public class IntBoardTests {
 
 	@Test
 	public void testCalcTargets15_2() {
-		ArrayList<Integer> expected = new ArrayList();
+		Set<Integer> expected = new HashSet<Integer>();
 		expected.add(13);
 		expected.add(10);
 		expected.add(7);
@@ -145,7 +148,7 @@ public class IntBoardTests {
 
 	@Test
 	public void testCalcTargets6_1() {
-		ArrayList<Integer> expected = new ArrayList();
+		Set<Integer> expected = new HashSet<Integer>();
 		expected.add(5);
 		expected.add(10);
 		expected.add(7);
@@ -157,7 +160,7 @@ public class IntBoardTests {
 
 	@Test
 	public void testCalcTargets9_2() {
-		ArrayList<Integer> expected = new ArrayList();
+		Set<Integer> expected = new HashSet<Integer>();
 		expected.add(4);
 		expected.add(12);
 		expected.add(14);
