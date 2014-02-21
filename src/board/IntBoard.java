@@ -24,6 +24,9 @@ public class IntBoard {
 	//wrapper class for target calculation logic
 	public void startTargets(int location, int steps) {
 		ArrayList targets = new ArrayList<Integer>();
+		
+		//need to add error handling for negative numbers?
+		//for now decided to use absolute value to at least prevent infinite loops while testing
 		calcTargets(location, Math.abs(steps), targets);
 	}
 	
