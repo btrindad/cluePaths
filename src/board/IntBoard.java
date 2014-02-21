@@ -7,9 +7,10 @@ import java.util.Set;
 
 
 public class IntBoard {
-	private Map<Integer, ArrayList<Integer>> adjMap;
+	//check if these really need to be static
+	private static Map<Integer, ArrayList<Integer>> adjMap;
 	private final static int MAP_SIZE = 4;
-	private boolean[] visited;
+	private static boolean[] visited;
 
 	public IntBoard() {
 		adjMap = new HashMap<Integer, ArrayList<Integer>>();
@@ -21,12 +22,21 @@ public class IntBoard {
 	}
 	
 	public void startTargets(int location, int steps) {
-		
+		ArrayList targets = new ArrayList<Integer>();
 	}
 	
-	public static ArrayList<Integer> calcTargets(int location, int steps) {
-		return null;
-		
+	public static void calcTargets(int location, int steps, ArrayList<Integer> targets){
+		visited[location] = true;
+		if(steps == 1){
+			targets.add(location);
+		}
+		else{
+			for(int adj : adjMap.get(location)){
+				calcTargets(adj, steps--, targets);
+			}
+		}
+		visited[location] = false;
+		return;
 	}
 	
 	public Set<Integer> getTargets() {
