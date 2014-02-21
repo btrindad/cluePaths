@@ -39,7 +39,7 @@ public class IntBoardTests {
 	public void testAdjacencyLists11()
 	{
 		int[] expected = {10,7,15};
-		ArrayList testList = testBoard.getAdjList(15);
+		ArrayList testList = testBoard.getAdjList(11);
 		for(int i : expected){
 			Assert.assertTrue(testList.contains(i));
 		}
@@ -50,7 +50,7 @@ public class IntBoardTests {
 	public void testAdjacencyLists4()
 	{
 		int[] expected = {5,0,8};
-		ArrayList testList = testBoard.getAdjList(15);
+		ArrayList testList = testBoard.getAdjList(4);
 		for(int i : expected){
 			Assert.assertTrue(testList.contains(i));
 		}
@@ -61,7 +61,7 @@ public class IntBoardTests {
 	public void testAdjacencyLists9()
 	{
 		int[] expected = {8,5,13,10};
-		ArrayList testList = testBoard.getAdjList(15);
+		ArrayList testList = testBoard.getAdjList(9);
 		for(int i : expected){
 			Assert.assertTrue(testList.contains(i));
 		}
@@ -72,7 +72,7 @@ public class IntBoardTests {
 	public void testAdjacencyLists6()
 	{
 		int[] expected = {10,5,7,2};
-		ArrayList testList = testBoard.getAdjList(15);
+		ArrayList testList = testBoard.getAdjList(6);
 		for(int i : expected){
 			Assert.assertTrue(testList.contains(i));
 		}
