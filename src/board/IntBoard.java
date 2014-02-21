@@ -2,6 +2,7 @@ package board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ public class IntBoard {
 	
 	//wrapper class for target calculation logic
 	public void startTargets(int location, int steps) {
-		ArrayList targets = new ArrayList<Integer>();
+		Set<Integer> targets = new HashSet<Integer>();
 		
 		//need to add error handling for negative numbers?
 		//for now decided to use absolute value to at least prevent infinite loops while testing
@@ -31,7 +32,7 @@ public class IntBoard {
 	}
 	
 	//recursive function to find all targets for a given location.
-	public static void calcTargets(int location, int steps, ArrayList<Integer> targets){
+	public static void calcTargets(int location, int steps, Set<Integer> targets){
 		visited[location] = true;
 		if(steps == 0){
 			targets.add(location);
