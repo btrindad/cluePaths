@@ -1,16 +1,19 @@
 package board;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 
 public class IntBoard {
 	private Map<Integer, ArrayList<Integer>> adjMap;
+	private final static int MAP_SIZE = 4;
 	private boolean[] visited;
 
 	public IntBoard() {
-		
+		adjMap = new HashMap<Integer, ArrayList<Integer>>();
+		visited = new boolean[MAP_SIZE * MAP_SIZE];
 	}
 	
 	public void calcAdjacencies() {
