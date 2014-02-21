@@ -9,10 +9,16 @@ import board.IntBoard;
 
 public class IntBoardTests {
 	IntBoard testBoard;
+	ArrayList<Integer> testTargets;
 
 	@Before
 	public void setupBoard() {
 		testBoard = new IntBoard();
+	}
+	
+	@Before
+	public void setUpTargets(){
+		testTargets = new ArrayList<Integer>();
 	}
 
 	@Test
@@ -97,8 +103,9 @@ public class IntBoardTests {
 		ArrayList<Integer> expected = new ArrayList();
 		expected.add(1);
 		expected.add(4);
-		ArrayList<Integer> actual = IntBoard.calcTargets(0, 1);
-		Assert.assertEquals(expected, actual);
+		IntBoard.calcTargets(0, 1, testTargets);
+		Assert.assertTrue(testTargets.size() > 0);
+		Assert.assertEquals(expected, testTargets);
 	}
 
 	@Test
@@ -108,8 +115,9 @@ public class IntBoardTests {
 		expected.add(5);
 		expected.add(10);
 		expected.add(15);
-		ArrayList<Integer> actual = IntBoard.calcTargets(13, 2);
-		Assert.assertEquals(expected, actual);	
+		IntBoard.calcTargets(13, 2, testTargets);
+		Assert.assertTrue(testTargets.size() > 0);
+		Assert.assertEquals(expected, testTargets);	
 	}
 
 	@Test
@@ -119,8 +127,9 @@ public class IntBoardTests {
 		expected.add(11);
 		expected.add(6);
 		expected.add(1);
-		ArrayList<Integer> actual = IntBoard.calcTargets(8, 3);
-		Assert.assertEquals(expected, actual);
+		IntBoard.calcTargets(8, 3, testTargets);
+		Assert.assertTrue(testTargets.size() > 0);
+		Assert.assertEquals(expected, testTargets);
 	}
 
 	@Test
@@ -129,8 +138,9 @@ public class IntBoardTests {
 		expected.add(13);
 		expected.add(10);
 		expected.add(7);
-		ArrayList<Integer> actual = IntBoard.calcTargets(15, 2);
-		Assert.assertEquals(expected, actual);
+		IntBoard.calcTargets(15, 2, testTargets);
+		Assert.assertTrue(testTargets.size() > 0);
+		Assert.assertEquals(expected, testTargets);
 	}
 
 	@Test
@@ -140,8 +150,9 @@ public class IntBoardTests {
 		expected.add(10);
 		expected.add(7);
 		expected.add(2);
-		ArrayList<Integer> actual = IntBoard.calcTargets(6, 1);
-		Assert.assertEquals(expected, actual);
+		IntBoard.calcTargets(6, 1, testTargets);
+		Assert.assertTrue(testTargets.size() > 0);
+		Assert.assertEquals(expected, testTargets);
 	}
 
 	@Test
@@ -153,7 +164,8 @@ public class IntBoardTests {
 		expected.add(11);
 		expected.add(6);
 		expected.add(1);
-		ArrayList<Integer> actual = IntBoard.calcTargets(9, 2);
-		Assert.assertEquals(expected, actual);
+		IntBoard.calcTargets(9, 2, testTargets);
+		Assert.assertTrue(testTargets.size() > 0);
+		Assert.assertEquals(expected, testTargets);
 	}
 }
