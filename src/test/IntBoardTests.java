@@ -104,7 +104,8 @@ public class IntBoardTests {
 
 	@Test
 	public void testCalcTargets0_1() {
-		Set<Integer> expected = new HashSet<Integer>();		expected.add(1);
+		Set<Integer> expected = new HashSet<Integer>();		
+		expected.add(1);
 		expected.add(4);
 		IntBoard.calcTargets(0, 1, testTargets);
 		Assert.assertTrue(testTargets.size() > 0);

@@ -39,7 +39,7 @@ public class IntBoard {
 		else{
 			for(int adj : getAdjList(location)){
 				if(!visited[adj]){
-					calcTargets(adj, steps--, targets);
+					calcTargets(adj, steps-1, targets);
 				}
 			}
 		}
