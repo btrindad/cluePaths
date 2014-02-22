@@ -24,6 +24,11 @@ public class IntBoardTests {
 	public void setUpTargets(){
 		testTargets = new HashSet<Integer>();
 	}
+	
+	@Before
+	public void calculateTheAdjacencies() {
+		testBoard.calcAdjacencies();
+	}
 
 	@Test
 	public void testAdjacencyLists0()
