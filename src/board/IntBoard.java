@@ -75,11 +75,7 @@ public class IntBoard {
 	
 	//wrapper class for target calculation logic
 	public void startTargets(int location, int steps) {
-		Set<Integer> targets = new HashSet<Integer>();
-		
-		//need to add error handling for negative numbers?
-		//for now decided to use absolute value to at least prevent infinite loops while testing
-		calcTargets(location, Math.abs(steps), targets);
+		Set<Integer> targets = getTargets(location, steps);
 	}
 	
 	//recursive function to find all targets for a given location.
@@ -98,8 +94,13 @@ public class IntBoard {
 		visited[location] = false;
 	}
 	
-	public Set<Integer> getTargets() {
-		return null;
+	public Set<Integer> getTargets(int location, int steps) {
+		Set<Integer> targets = new HashSet<Integer>();
+		
+		//need to add error handling for negative numbers?
+		//for now decided to use absolute value to at least prevent infinite loops while testing
+		calcTargets(location, Math.abs(steps), targets);
+		return targets;
 	}
 	
 	public static ArrayList<Integer> getAdjList(int cell) {
