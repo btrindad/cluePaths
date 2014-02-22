@@ -131,6 +131,9 @@ public class IntBoardTests {
 		expected.add(11);
 		expected.add(6);
 		expected.add(1);
+		expected.add(4);
+		expected.add(9);
+		expected.add(12);
 		IntBoard.calcTargets(8, 3, testTargets);
 		Assert.assertTrue(testTargets.size() > 0);
 		Assert.assertEquals(expected, testTargets);
