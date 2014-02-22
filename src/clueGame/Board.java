@@ -13,6 +13,11 @@ public class Board {
 		
 	}
 	
+	//returns length of legend
+	public int getNumRooms(){
+		return rooms.size();
+	}
+	
 	public int calcIndex (int row, int column) {
 		return 0; //((numColumns*row) + column);
 	}
