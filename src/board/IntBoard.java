@@ -21,7 +21,7 @@ public class IntBoard {
 		for (int i = 0; i < (MAP_SIZE*MAP_SIZE); i++) {
 			ArrayList<Integer> adjList = new ArrayList<Integer>();
 
-			if (i%4 == 0) {
+			if (i%MAP_SIZE == 0) {
 				adjList.add(i + 1);
 
 				if (i < (MAP_SIZE*MAP_SIZE - MAP_SIZE)) {
@@ -32,7 +32,7 @@ public class IntBoard {
 					adjList.add(i - MAP_SIZE);
 				}
 			}
-			else if (i%4 == 1) {
+			else if (i%MAP_SIZE == 1) {
 				adjList.add(i + 1);
 				adjList.add(i - 1);
 
@@ -44,7 +44,7 @@ public class IntBoard {
 					adjList.add(i - MAP_SIZE);
 				}
 			}
-			else if (i%4 == 2) {
+			else if (i%MAP_SIZE == 2) {
 				adjList.add(i + 1);
 				adjList.add(i - 1);
 
@@ -57,7 +57,7 @@ public class IntBoard {
 				}
 
 			}
-			else if (i%4 == 3) {
+			else if (i%MAP_SIZE == 3) {
 				adjList.add(i - 1);
 
 				if (i < (MAP_SIZE*MAP_SIZE - (MAP_SIZE - 3))) {
@@ -108,7 +108,7 @@ public class IntBoard {
 	}
 	
 	public static int calcIndex(int row, int column) {
-		return ((4*row) + column);
+		return ((MAP_SIZE*row) + column);
 	}
 	
 }
