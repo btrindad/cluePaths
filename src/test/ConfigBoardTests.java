@@ -44,6 +44,20 @@ public class ConfigBoardTests {
 		Assert.assertEquals("Hall", testBoard.getRoom('H'));
 		Assert.assertEquals("Closet", testBoard.getRoom('X'));
 		Assert.assertEquals("Walkway", testBoard.getRoom('W'));
+		
+		//also ran tests to make sure that mappings work even with lowercase letters as
+		//input. These are optional but they test if code handles irregular input
+		Assert.assertEquals("Conservatory", testBoard.getRoom('c'));
+		Assert.assertEquals("Kitchen", testBoard.getRoom('k'));
+		Assert.assertEquals("Ballroom", testBoard.getRoom('b'));
+		Assert.assertEquals("Billiard room", testBoard.getRoom('r'));
+		Assert.assertEquals("Library", testBoard.getRoom('l'));
+		Assert.assertEquals("Study", testBoard.getRoom('s'));
+		Assert.assertEquals("Dining Room", testBoard.getRoom('d'));
+		Assert.assertEquals("Lounge", testBoard.getRoom('o'));
+		Assert.assertEquals("Hall", testBoard.getRoom('h'));
+		Assert.assertEquals("Closet", testBoard.getRoom('x'));
+		Assert.assertEquals("Walkway", testBoard.getRoom('w'));
 	}
 	
 	@Test
