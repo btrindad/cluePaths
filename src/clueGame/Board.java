@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Board {
@@ -8,6 +9,13 @@ public class Board {
 	private Map<Character,String> rooms;
 	private int numRows;
 	private int numColumns;
+	
+	public Board() {
+		cells = new ArrayList<BoardCell>();
+		rooms = new HashMap<Character, String>();
+		numRows = 0;
+		numColumns = 0;
+	}
 	
 	public void loadConfigFiles() {
 		
