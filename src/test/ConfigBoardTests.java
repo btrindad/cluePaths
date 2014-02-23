@@ -73,7 +73,11 @@ public class ConfigBoardTests {
 		assertEquals(483, testBoard.calcIndex(NUM_ROWS-1, 0));
 		assertEquals(505, testBoard.calcIndex(NUM_ROWS-1, NUM_COLUMNS-1));
 		assertEquals(26, testBoard.calcIndex(1, 3));
-		assertEquals(64, testBoard.calcIndex(2, 18));		
+		assertEquals(64, testBoard.calcIndex(2, 18));
+		assertEquals(264, testBoard.calcIndex(11, 11));
+		assertEquals(326,testBoard.calcIndex(14, 4));
+		assertEquals(180, testBoard.calcIndex(7, 19));
+		assertEquals(499, testBoard.calcIndex(21, 16));
 	}
 	
 	@Test
@@ -141,6 +145,7 @@ public class ConfigBoardTests {
 		Board tBoard = new Board("ClueLayout.csv", "ClueLegendBadFormat.txt");
 		tBoard.loadRoomConfig();
 		tBoard.loadBoardConfig();
+		
 	}
 	
 }
