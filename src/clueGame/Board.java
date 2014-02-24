@@ -146,7 +146,6 @@ public class Board {
 
 	public String getRoom(char c) {
 		c = Character.toUpperCase(c);
-		System.out.println("the key is: " + c);
 		return rooms.get(c);
 	}
 	
