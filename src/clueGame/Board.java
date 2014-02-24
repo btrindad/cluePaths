@@ -129,7 +129,7 @@ public class Board {
 	public RoomCell getRoomCell(int r, int c) {
 		int location = calcIndex(r, c);
 		if (cells.get(location).isRoom()) {
-			return (RoomCell)cells.get(location);
+			return (RoomCell) cells.get(location);
 		}
 		
 		else { // For now .....
