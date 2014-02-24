@@ -53,7 +53,7 @@ public class Board {
 		
 	}
 	
-	//returns length of legend
+	//returns legend
 	public Map<Character, String> getRooms(){
 		return rooms;
 	}
@@ -84,6 +84,7 @@ public class Board {
 	}
 
 	public String getRoom(char c) {
+		c = Character.toUpperCase(c);
 		return rooms.get(c);
 	}
 	

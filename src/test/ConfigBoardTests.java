@@ -40,6 +40,13 @@ public class ConfigBoardTests {
 		assertEquals("Billiard room", rooms.get('R'));
 		assertEquals("Dining room", rooms.get('D'));
 		assertEquals("Walkway", rooms.get('W'));
+		
+		//test ability to handle lower case letters
+		assertEquals("Conservatory", rooms.get('c'));
+		assertEquals("Ballroom", rooms.get('b'));
+		assertEquals("Billiard room", rooms.get('r'));
+		assertEquals("Dining room", rooms.get('d'));
+		assertEquals("Walkway", rooms.get('w'));
 	}
 	
 	@Test
