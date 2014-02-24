@@ -57,6 +57,7 @@ public class ConfigBoardTests {
 		assertEquals(505, testBoard.calcIndex(NUM_ROWS-1, NUM_COLUMNS-1));
 		
 		//test a few others
+		System.out.println(testBoard.calcIndex(1, 3));
 		assertEquals(26, testBoard.calcIndex(1, 3));
 		assertEquals(64, testBoard.calcIndex(2, 18));
 		assertEquals(264, testBoard.calcIndex(11, 11));

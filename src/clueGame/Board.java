@@ -18,15 +18,11 @@ public class Board {
 	public Board() {
 		cells = new ArrayList<BoardCell>();
 		rooms = new HashMap<Character, String>();
-		numRows = 0;
-		numColumns = 0;
 	}
 	
 	public Board(String layout, String legend) {
 		cells = new ArrayList<BoardCell>();
 		rooms = new HashMap<Character, String>();
-		numRows = 0;
-		numColumns = 0;
 		layoutFile = layout;
 		legendFile = legend;
 	}
@@ -46,13 +42,18 @@ public class Board {
 		Scanner inScan = new Scanner(reader);
 		
 		try {
+			System.out.println("HELLO");
+			int i = 0;
 			while (inScan.hasNext()) {
 				String s = inScan.nextLine();
 				String[] queue = s.split(",");
-				
-				if (queue.length != numColumns) {
+				System.out.println("WORLD");
+				if (queue.length != 23 /*numColumns && !(numColumns > 0) This does not work because at the start of the program, numColumns will equal 0*/) {
 					throw new BadConfigFormatException("Problem with the format of the board file.");
 				}
+				
+				numColumns = queue.length;
+				System.out.println("NColumns: " + numColumns);
 				
 				for (String t : queue) {
 					if (!rooms.containsKey(t.charAt(0))) {
@@ -75,7 +76,9 @@ public class Board {
 						cells.add(tempWC);
 					}
 				}
+				System.out.println("NRows: "+ numRows);
 			}
+			numRows = i;
 		}
 		finally {
 			inScan.close();
@@ -110,6 +113,8 @@ public class Board {
 	}
 	
 	public int calcIndex (int row, int column) {
+		System.out.println("Number of Columns: " + numColumns);
+		System.out.println("Number of Rows: " + numRows);
 		return ((numColumns*row) + column);
 	}
 	
