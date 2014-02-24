@@ -40,13 +40,23 @@ public class ConfigBoardTests {
 		assertEquals("Billiard room", rooms.get('R'));
 		assertEquals("Dining room", rooms.get('D'));
 		assertEquals("Walkway", rooms.get('W'));
-		
+	}
+	
+	//test the board getRoom method
+	@Test
+	public void testGetRooms(){
+		assertEquals("Conservatory", testBoard.getRoom('C'));
+		assertEquals("Ballroom", testBoard.getRoom('B'));
+		assertEquals("Billiard room", testBoard.getRoom('R'));
+		assertEquals("Dining room", testBoard.getRoom('D'));
+		assertEquals("Walkway", testBoard.getRoom('W'));
+
 		//test ability to handle lower case letters
-		assertEquals("Conservatory", rooms.get('c'));
-		assertEquals("Ballroom", rooms.get('b'));
-		assertEquals("Billiard room", rooms.get('r'));
-		assertEquals("Dining room", rooms.get('d'));
-		assertEquals("Walkway", rooms.get('w'));
+		assertEquals("Conservatory", testBoard.getRoom('c'));
+		assertEquals("Ballroom", testBoard.getRoom('b'));
+		assertEquals("Billiard room", testBoard.getRoom('r'));
+		assertEquals("Dining room", testBoard.getRoom('d'));
+		assertEquals("Walkway", testBoard.getRoom('w'));
 	}
 	
 	@Test
