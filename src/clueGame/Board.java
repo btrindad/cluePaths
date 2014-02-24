@@ -4,8 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Board {
 	private ArrayList<BoardCell> cells;
@@ -154,8 +157,29 @@ public class Board {
 		return numColumns;
 	}
 	
+	/* ------------------------------------------------- */
+	//logic from IntBoard class
 	public void calcAdjacencies() {
-		//from intBoard class
+	}
+	
+	public LinkedList<Integer> getAdjList(int cell){
+		//filler to prevent errors until implemented
+		return new LinkedList<Integer>();
+	}
+	
+	/*
+	 * public static void calcTargets(int location, int steps, Set<Integer> targets){
+	}*/
+	
+	//what is the third parameter supposed to be? the above commented out
+	//stub is from IntBoard
+	public void calcTargets(int location, int steps, int whatIsThisParameter){
+		
+	}
+	
+	public Set<BoardCell> getTargets(){
+		//filler to prevent errors
+		return new HashSet<BoardCell>();
 	}
 	
 }
