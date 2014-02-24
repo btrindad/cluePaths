@@ -33,8 +33,8 @@ public class Board {
 	
 	public void loadConfigFiles() {
 		try {
-			loadRoomConfig();
 			loadBoardConfig();
+			loadRoomConfig();
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -47,23 +47,33 @@ public class Board {
 		
 		try {
 			while (inScan.hasNext()) {
-				String s = inScan.next();
-				if (s != "W") {
-					char tempDD = 'N';
-					char tempRI = s.charAt(0);
-
-					if (s.length() > 1) {
-						tempDD = s.charAt(1);
+				String s = inScan.nextLine();
+				String[] queue = s.split(",");
+				
+				if (queue.length != numColumns) {
+					throw new BadConfigFormatException("Problem with the format of the board file.");
+				}
+				
+				for (String t : queue) {
+					if (!rooms.containsKey(t.charAt(0))) {
+						throw new BadConfigFormatException("Problem with the format of the board file: Invalid room key.");
 					}
 					
-					RoomCell tempRC = new RoomCell(tempRI, tempDD);
-					cells.add(tempRC);
-				}
-				else {
-					WalkwayCell tempWC = new WalkwayCell();
-					cells.add(tempWC);
-				}
+					if (t != "W") {
+						char tempDD = 'N';
+						char tempRI = t.charAt(0);
 
+						if (t.length() > 1) {
+							tempDD = t.charAt(1);
+						}
+						
+						RoomCell tempRC = new RoomCell(tempRI, tempDD);
+					}
+					else {
+						WalkwayCell tempWC = new WalkwayCell();
+						cells.add(tempWC);
+					}
+				}
 			}
 		}
 		finally {
@@ -76,7 +86,15 @@ public class Board {
 		Scanner inScan = new Scanner(reader);
 		
 		try {
-			String c = inScan.next();
+			while (inScan.hasNext()) {
+				String u = inScan.nextLine();
+				String[] queue = u.split(",");
+				if (queue.length != 1) {
+					throw new BadConfigFormatException("Problem with the format of the room legend file.");
+				}
+				
+				rooms.put(queue[0].charAt(0), queue[1]);
+			}
 			
 		}
 		finally {
