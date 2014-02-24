@@ -50,18 +50,15 @@ public class Board {
 		Scanner inScan = new Scanner(reader);
 		
 		try {
-			System.out.println("HELLO");
 			int i = 0;
 			while (inScan.hasNext()) {
 				String s = inScan.nextLine();
 				String[] queue = s.split(",");
-				System.out.println("number of values in row is: " + queue.length);
 				if (queue.length != numColumns && (numColumns > 0)) {
 					throw new BadConfigFormatException("Problem with the format of the board file.");
 				}
 				
 				numColumns = queue.length;
-				System.out.println("NColumns: " + numColumns);
 				
 				for (String t : queue) {
 					if (!rooms.containsKey(t.charAt(0))) {
@@ -84,7 +81,6 @@ public class Board {
 						cells.add(tempWC);
 					}
 				}
-				System.out.println("NRows: "+ numRows);
 			}
 			numRows = i;
 		}
@@ -120,9 +116,7 @@ public class Board {
 		return rooms;
 	}
 	
-	public int calcIndex (int row, int column) {
-		System.out.println("Number of Columns: " + numColumns);
-		System.out.println("Number of Rows: " + numRows);
+	public int calcIndex (int row, int column) {;
 		return ((numColumns*row) + column);
 	}
 	
@@ -137,13 +131,11 @@ public class Board {
 	
 	public RoomCell getRoomCell(int r, int c) {
 		int location = calcIndex(r, c);
-		System.out.println(location + " is current location");
 		if (cells.get(location).isRoom()) {
 			return (RoomCell) cells.get(location);
 		}
 		
 		else { // For now .....
-			System.out.println("RoomCell error");
 			RoomCell e = new RoomCell('N', 'O');
 			return e;
 		}
