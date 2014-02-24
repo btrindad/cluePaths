@@ -1,8 +1,11 @@
 package clueGame;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Board {
 	private ArrayList<BoardCell> cells;
@@ -30,15 +33,23 @@ public class Board {
 	}
 	
 	public void loadConfigFiles() {
-		loadRoomConfig();
-		loadBoardConfig();
+		/*try {
+			//loadRoomConfig();
+			//loadBoardConfig();
+		}
+		catch (BadConfigFormatException b) {
+			System.out.println(b.getMessage());
+		}*/
 	}
 	
-	public void loadRoomConfig() {
-		
+	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
+		FileReader reader = new FileReader(layoutFile);
+		Scanner inScan = new Scanner(reader);
 	}
 	
-	public void loadBoardConfig() {
+	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
+		FileReader reader = new FileReader(legendFile);
+		Scanner inScan = new Scanner(reader);
 		
 	}
 	
@@ -48,36 +59,40 @@ public class Board {
 	}
 	
 	public int calcIndex (int row, int column) {
-		return 0; //((numColumns*row) + column);
+		return ((numColumns*row) + column);
 	}
 	
 	public BoardCell getCell(int location) {
-		BoardCell aBoardCell = new BoardCell();
-		return aBoardCell;//cells.get(location);
+		return cells.get(location);
 	}
 	
 	public BoardCell getCell(int r, int c) {
-		//int location = calcIndex(r, c);
-		BoardCell aBoardCell = new BoardCell();
-		return aBoardCell;//cells.get(location);
+		int location = calcIndex(r, c);
+		return cells.get(location);
 	}
 	
 	public RoomCell getRoomCell(int r, int c) {
-		//int location = calcIndex(r, c);
-		RoomCell aRoomCell = new RoomCell();
-		return aRoomCell;//cells.get(location);
+		int location = calcIndex(r, c);
+		if (cells.get(location).isRoom()) {
+			return (RoomCell)cells.get(location);
+		}
+		
+		else { // For now .....
+			RoomCell e = new RoomCell();
+			return e;
+		}
 	}
 
 	public String getRoom(char c) {
-		return "";//rooms.get(c);
+		return rooms.get(c);
 	}
 	
 	public int getNumRows() {
-		return 0; // numRows;
+		return numRows;
 	}
 	
 	public int getNumColumns() {
-		return 0; //numColumns
+		return numColumns;
 	}
 	
 }
