@@ -15,8 +15,13 @@ public class Board {
 	private String layoutFile;
 	private String legendFile;
 	
+	//check if these really need to be static
+	private static Map<Integer, ArrayList<Integer>> adjMap;
+	private static boolean[] visited;
+	
 	public Board() {
 		cells = new ArrayList<BoardCell>();
+		adjMap = new HashMap<Integer, ArrayList<Integer>>();
 		rooms = new HashMap<Character, String>();
 		numRows = 0;
 		numColumns = 0;
