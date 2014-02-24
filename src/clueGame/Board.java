@@ -35,7 +35,8 @@ public class Board {
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -85,8 +86,8 @@ public class Board {
 	}
 	
 	//returns length of legend
-	public int getNumRooms(){
-		return rooms.size();
+	public Map<Character, String> getRooms(){
+		return rooms;
 	}
 	
 	public int calcIndex (int row, int column) {
