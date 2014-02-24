@@ -54,8 +54,8 @@ public class Board {
 	}
 	
 	//returns length of legend
-	public int getNumRooms(){
-		return rooms.size();
+	public Map<Character, String> getRooms(){
+		return rooms;
 	}
 	
 	public int calcIndex (int row, int column) {
