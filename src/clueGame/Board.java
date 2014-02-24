@@ -55,8 +55,8 @@ public class Board {
 			while (inScan.hasNext()) {
 				String s = inScan.nextLine();
 				String[] queue = s.split(",");
-				System.out.println("WORLD");
-				if (queue.length != 23 /*numColumns && !(numColumns > 0) This does not work because at the start of the program, numColumns will equal 0*/) {
+				System.out.println("number of values in row is: " + queue.length);
+				if (queue.length != numColumns && (numColumns > 0)) {
 					throw new BadConfigFormatException("Problem with the format of the board file.");
 				}
 				
@@ -101,7 +101,7 @@ public class Board {
 			while (inScan.hasNext()) {
 				String u = inScan.nextLine();
 				String[] queue = u.split(",");
-				if (queue.length != 1) {
+				if (queue.length != 2) {
 					throw new BadConfigFormatException("Problem with the format of the room legend file.");
 				}
 				
