@@ -21,6 +21,7 @@ public class IntBoard {
 		for (int i = 0; i < (MAP_SIZE*MAP_SIZE); i++) {
 			ArrayList<Integer> adjList = new ArrayList<Integer>();
 
+			//if i%numColumns == 0, increment row
 			if (i%MAP_SIZE == 0) {
 				adjList.add(i + 1);
 

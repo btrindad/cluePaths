@@ -129,11 +129,13 @@ public class Board {
 	
 	public RoomCell getRoomCell(int r, int c) {
 		int location = calcIndex(r, c);
+		System.out.println(location + " is current location");
 		if (cells.get(location).isRoom()) {
 			return (RoomCell) cells.get(location);
 		}
 		
 		else { // For now .....
+			System.out.println("RoomCell error");
 			RoomCell e = new RoomCell('N', 'O');
 			return e;
 		}
@@ -150,6 +152,10 @@ public class Board {
 	
 	public int getNumColumns() {
 		return numColumns;
+	}
+	
+	public void calcAdjacencies() {
+		//from intBoard class
 	}
 	
 }
