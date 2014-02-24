@@ -68,6 +68,7 @@ public class Board {
 						}
 						
 						RoomCell tempRC = new RoomCell(tempRI, tempDD);
+						cells.add(tempRC);
 					}
 					else {
 						WalkwayCell tempWC = new WalkwayCell();
