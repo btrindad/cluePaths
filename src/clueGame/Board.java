@@ -33,13 +33,13 @@ public class Board {
 	}
 	
 	public void loadConfigFiles() {
-		/*try {
-			//loadRoomConfig();
-			//loadBoardConfig();
+		try {
+			loadRoomConfig();
+			loadBoardConfig();
 		}
-		catch (BadConfigFormatException b) {
-			System.out.println(b.getMessage());
-		}*/
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
