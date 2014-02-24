@@ -29,27 +29,58 @@ public class Board {
 		numColumns = 0;
 		layoutFile = layout;
 		legendFile = legend;
-		
 	}
 	
 	public void loadConfigFiles() {
-		/*try {
-			//loadRoomConfig();
-			//loadBoardConfig();
+		try {
+			loadRoomConfig();
+			loadBoardConfig();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		catch (BadConfigFormatException b) {
-			System.out.println(b.getMessage());
-		}*/
 	}
 	
 	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
 		FileReader reader = new FileReader(layoutFile);
 		Scanner inScan = new Scanner(reader);
+		
+		try {
+			while (inScan.hasNext()) {
+				String s = inScan.next();
+				if (s != "W") {
+					char tempDD = 'N';
+					char tempRI = s.charAt(0);
+
+					if (s.length() > 1) {
+						tempDD = s.charAt(1);
+					}
+					
+					RoomCell tempRC = new RoomCell(tempRI, tempDD);
+					cells.add(tempRC);
+				}
+				else {
+					WalkwayCell tempWC = new WalkwayCell();
+					cells.add(tempWC);
+				}
+
+			}
+		}
+		finally {
+			inScan.close();
+		}
 	}
 	
 	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
 		FileReader reader = new FileReader(legendFile);
 		Scanner inScan = new Scanner(reader);
+		
+		try {
+			String c = inScan.next();
+			
+		}
+		finally {
+			inScan.close();
+		}
 		
 	}
 	
@@ -78,7 +109,7 @@ public class Board {
 		}
 		
 		else { // For now .....
-			RoomCell e = new RoomCell();
+			RoomCell e = new RoomCell('N', 'O');
 			return e;
 		}
 	}
