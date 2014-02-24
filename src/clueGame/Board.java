@@ -101,6 +101,9 @@ public class Board {
 					throw new BadConfigFormatException("Problem with the format of the room legend file.");
 				}
 				
+				//clean up whitespace from the value
+				queue[1] = queue[1].replaceFirst(" ", "");
+				
 				rooms.put(queue[0].charAt(0), queue[1]);
 			}
 			
@@ -143,6 +146,7 @@ public class Board {
 
 	public String getRoom(char c) {
 		c = Character.toUpperCase(c);
+		System.out.println("the key is: " + c);
 		return rooms.get(c);
 	}
 	
