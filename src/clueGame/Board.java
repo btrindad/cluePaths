@@ -34,13 +34,12 @@ public class Board {
 		numColumns = 0;
 		layoutFile = layout;
 		legendFile = legend;
-		
 	}
 	
 	public void loadConfigFiles() {
 		try {
-			loadRoomConfig();
 			loadBoardConfig();
+			loadRoomConfig();
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -50,11 +49,62 @@ public class Board {
 	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
 		FileReader reader = new FileReader(layoutFile);
 		Scanner inScan = new Scanner(reader);
+		
+		try {
+			while (inScan.hasNext()) {
+				String s = inScan.nextLine();
+				String[] queue = s.split(",");
+				
+				if (queue.length != numColumns) {
+					throw new BadConfigFormatException("Problem with the format of the board file.");
+				}
+				
+				for (String t : queue) {
+					if (!rooms.containsKey(t.charAt(0))) {
+						throw new BadConfigFormatException("Problem with the format of the board file: Invalid room key.");
+					}
+					
+					if (t != "W") {
+						char tempDD = 'N';
+						char tempRI = t.charAt(0);
+
+						if (t.length() > 1) {
+							tempDD = t.charAt(1);
+						}
+						
+						RoomCell tempRC = new RoomCell(tempRI, tempDD);
+					}
+					else {
+						WalkwayCell tempWC = new WalkwayCell();
+						cells.add(tempWC);
+					}
+				}
+			}
+		}
+		finally {
+			inScan.close();
+		}
 	}
 	
 	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
 		FileReader reader = new FileReader(legendFile);
 		Scanner inScan = new Scanner(reader);
+		
+		try {
+			while (inScan.hasNext()) {
+				String u = inScan.nextLine();
+				String[] queue = u.split(",");
+				if (queue.length != 1) {
+					throw new BadConfigFormatException("Problem with the format of the room legend file.");
+				}
+				
+				rooms.put(queue[0].charAt(0), queue[1]);
+			}
+			
+		}
+		finally {
+			inScan.close();
+		}
 		
 	}
 	
@@ -83,7 +133,7 @@ public class Board {
 		}
 		
 		else { // For now .....
-			RoomCell e = new RoomCell();
+			RoomCell e = new RoomCell('N', 'O');
 			return e;
 		}
 	}
