@@ -262,19 +262,14 @@ public class BoardAdjTests {
 	public void testTargetsIntoRoom()
 	{
 		// One room is exactly 2 away
-		board.calcTargets(17, 16, 2);
+		board.calcTargets(6, 6, 2);
 		Set<BoardCell> targets= board.getTargets();
-		Assert.assertEquals(7, targets.size());
-		// directly left (can't go right 2 steps)
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(17, 14))));
-		// directly up and down
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(15, 16))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(19, 16))));
-		// one up/down, one left/right
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(18, 17))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(18, 15))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(16, 17))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(16, 15))));
+		Assert.assertEquals(5, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 5))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(8, 6))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 7))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(4, 6))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(5, 7))));
 	}
 	
 	// Test getting into room, doesn't require all steps
