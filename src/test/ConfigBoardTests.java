@@ -104,15 +104,15 @@ public class ConfigBoardTests {
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
 		
-		//test a door pointing up
+		//test a door pointing left
 		room = testBoard.getRoomCell(15, 18);
 		assertTrue(room.isDoorway());
-		assertEquals(RoomCell.DoorDirection.UP, room.getDoorDirection());
+		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
 		
-		//test a door pointing left
+		//test a door pointing up
 		room = testBoard.getRoomCell(14, 11);
 		assertTrue(room.isDoorway());
-		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
+		assertEquals(RoomCell.DoorDirection.UP, room.getDoorDirection());
 		
 		//test if cell can recognize it isn't a door
 		room = testBoard.getRoomCell(14, 14);
