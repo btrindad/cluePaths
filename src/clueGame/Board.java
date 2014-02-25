@@ -173,7 +173,7 @@ public class Board {
 	
 	//what is the third parameter supposed to be? the above commented out
 	//stub is from IntBoard
-	public void calcTargets(int location, int steps, int whatIsThisParameter){
+	public void calcTargets(int row, int column, int steps){
 		
 	}
 	

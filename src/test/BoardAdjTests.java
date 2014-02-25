@@ -14,7 +14,7 @@ public class BoardAdjTests {
 	private static Board board;
 	@BeforeClass
 	public static void setUp() {
-		board = new Board();
+		board = new Board("CLUE layouts.csv", "ClueLegend.txt");
 		board.loadConfigFiles();
 		board.calcAdjacencies();
 
@@ -282,28 +282,26 @@ public class BoardAdjTests {
 	@Test
 	public void testTargetsIntoRoomShortcut() 
 	{
-		board.calcTargets(12, 7, 3);
+		board.calcTargets(8, 16, 4);
 		Set<BoardCell> targets= board.getTargets();
-		Assert.assertEquals(12, targets.size());
-		// directly up and down
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(15, 7))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(9, 7))));
-		// directly right (can't go left)
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(12, 10))));
-		// right then down
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(13, 9))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(13, 7))));
-		// down then left/right
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(14, 6))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(14, 8))));
-		// right then up
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(10, 8))));
-		// into the rooms
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(11, 6))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(10, 6))));		
-		// 
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(11, 7))));		
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(12, 8))));		
+		Assert.assertEquals(14, targets.size());
+		
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(4, 16))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(12, 16))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(8, 20))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(8, 12))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 13))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 15))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 17))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(6, 16))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(5, 15))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(11, 15))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(10, 16))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(6, 18))));
+		
+		// Going into a door
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(11, 17))));		
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(5, 17))));		
 		
 	}
 
@@ -313,18 +311,18 @@ public class BoardAdjTests {
 	public void testRoomExit()
 	{
 		// Take one step, essentially just the adj list
-		board.calcTargets(4, 20, 1);
+		board.calcTargets(6, 11, 1);
 		Set<BoardCell> targets= board.getTargets();
 		// Ensure doesn't exit through the wall
 		Assert.assertEquals(1, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(4, 19))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 11))));
 		// Take two steps
-		board.calcTargets(4, 20, 2);
+		board.calcTargets(6, 11, 2);
 		targets= board.getTargets();
 		Assert.assertEquals(3, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(3, 19))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(5, 19))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(4, 18))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(8, 11))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 12))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 10))));
 	}
 
 }
