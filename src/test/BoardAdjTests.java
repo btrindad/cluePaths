@@ -244,16 +244,17 @@ public class BoardAdjTests {
 
 	@Test
 	public void testTargetsSixSteps() { // All test functions up to here updated
-		board.calcTargets(14, 0, 6);
+		board.calcTargets(6, 10, 6);
 		Set<BoardCell> targets= board.getTargets();
-		Assert.assertEquals(7, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(14, 6))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(15, 5))));	
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(15, 3))));	
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(14, 4))));	
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(15, 1))));	
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(14, 2))));	
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(13, 4))));	
+		Assert.assertEquals(8, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(2, 9))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(0, 10))));	
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(6, 11))));	
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(6, 6))));	
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 5))));	
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(8, 6))));	
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 15))));
+		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(8, 14))));
 	}	
 	
 	// Test getting into a room
