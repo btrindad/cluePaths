@@ -81,6 +81,7 @@ public class Board {
 						cells.add(tempWC);
 					}
 				}
+				i++;
 			}
 			numRows = i;
 		}

@@ -26,6 +26,15 @@ public class RoomCell extends BoardCell{
 		}
 	}
 	
+	@Override
+	public boolean isDoorway() {
+		if (doorDirection != DoorDirection.NONE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 	@Override
 	public boolean isRoom() {

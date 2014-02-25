@@ -138,7 +138,6 @@ public class ConfigBoardTests {
 		assertEquals(16, numDoors);
 	}
 	
-	
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
 		//create new board to test bad config files
