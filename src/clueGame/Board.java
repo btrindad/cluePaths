@@ -133,15 +133,14 @@ public class Board {
 		return cells.get(location);
 	}
 	
-	public RoomCell getRoomCell(int r, int c) {
+	public RoomCell getRoomCell(int r, int c) throws RuntimeException {
 		int location = calcIndex(r, c);
 		if (cells.get(location).isRoom()) {
 			return (RoomCell) cells.get(location);
 		}
 		
-		else { // For now .....
-			RoomCell e = new RoomCell('N', 'O');
-			return e;
+		else { // We chose to handle a non-RoomCell situation by throwing a RuntimeException
+			throw new RuntimeException("The given location does not contain a RoomCell.");
 		}
 	}
 
