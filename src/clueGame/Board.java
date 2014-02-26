@@ -19,8 +19,9 @@ public class Board {
 	private String legendFile;
 	
 	//check if these really need to be static
-	private static Map<Integer, HashSet<Integer>> adjMap;
-	private static boolean[] visited;
+	private Map<Integer, HashSet<Integer>> adjMap;
+	private boolean[] visited;
+	private Set<Integer> targets;
 	
 	public Board() {
 		cells = new ArrayList<BoardCell>();
@@ -89,6 +90,9 @@ public class Board {
 		finally {
 			inScan.close();
 		}
+		
+		//is it better to set this to the size of the board, or just the number of visitable areas?
+		visited = new boolean[cells.size()];
 	}
 	
 	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
@@ -245,8 +249,23 @@ public class Board {
 	
 	//what is the third parameter supposed to be? the above commented out
 	//stub is from IntBoard
-	public void calcTargets(int row, int column, int steps){
+	
+	public void startTargets(int location, int steps){
 		
+	}
+	public void calcTargets(int location, int steps){
+		visited[location] = true;
+		if(steps == 0){
+			targets.add(location);
+		}
+		else{
+			for(int adj : getAdjList(location)){
+				if(!visited[adj]){
+					calcTargets(adj, steps-1);
+				}
+			}
+		}
+		visited[location] = false;
 	}
 	
 	public Set<BoardCell> getTargets(){
