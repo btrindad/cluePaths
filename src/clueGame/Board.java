@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import clueGame.RoomCell.DoorDirection;
+
 public class Board {
 	private ArrayList<BoardCell> cells;
 	private Map<Character,String> rooms;
@@ -168,22 +170,20 @@ public class Board {
 				adjList = new ArrayList<Integer>();
 				current = getCell(calcIndex(i,j));
 				
-				if(checkAdjacency(calcIndex(i-1,j))){
+				if(checkAdjacency(calcIndex(i-1,j), calcIndex(i,j))){
 					adjList.add(i-1, j);
 				}
-				if(checkAdjacency(calcIndex(i+1,j))){
+				if(checkAdjacency(calcIndex(i+1,j), calcIndex(i,j))){
 					adjList.add(i+1, j);
 				}
-				if(checkAdjacency(calcIndex(i,j-1))){
+				if(checkAdjacency(calcIndex(i,j-1), calcIndex(i,j))){
 					adjList.add(i, j-1);
 				}
-				if(checkAdjacency(calcIndex(i,j+1))){
+				if(checkAdjacency(calcIndex(i,j+1), calcIndex(i,j))){
 					adjList.add(i, j+1);
 				}
 				
-				
 				adjMap.put(calcIndex(current.row, current.column), adjList);
-				
 			}
 			
 			
@@ -231,8 +231,51 @@ public class Board {
 		}
 	}
 	
-	public boolean checkAdjacency(int index){
-		return false;
+	public boolean checkAdjacency(int index, int origin){
+		if (cells.get(index).isWalkway()) {
+			return true;
+		} else if (cells.get(index).isRoom() && !cells.get(index).isDoorway()) {
+			return false;
+		}
+		else if (index == origin + numColumns && cells.get(index).isRoom()) {
+			RoomCell tRC = (RoomCell)cells.get(index);
+			if (tRC.getDoorDirection() == DoorDirection.UP) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else if (index == origin - numColumns && cells.get(index).isRoom()) {
+			RoomCell tRC = (RoomCell)cells.get(index);
+			if (tRC.getDoorDirection() == DoorDirection.DOWN) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else if (index == origin + 1 && cells.get(index).isRoom()) {
+			RoomCell tRC = (RoomCell)cells.get(index);
+			if (tRC.getDoorDirection() == DoorDirection.LEFT) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else if (index == origin - 1 && cells.get(index).isRoom()) {
+			RoomCell tRC = (RoomCell)cells.get(index);
+			if (tRC.getDoorDirection() == DoorDirection.RIGHT) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public LinkedList<Integer> getAdjList(int cell){
