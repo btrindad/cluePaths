@@ -60,7 +60,8 @@ public class Board {
 				
 				numColumns = queue.length;
 				
-				for (String t : queue) {
+				for (int j=0; j<queue.length; j++) {
+					String t = queue[j];
 					if (!rooms.containsKey(t.charAt(0))) {
 						throw new BadConfigFormatException("Problem with the format of the board file: Invalid room key.");
 					}
@@ -73,11 +74,11 @@ public class Board {
 							tempDD = t.charAt(1);
 						}
 						
-						RoomCell tempRC = new RoomCell(tempRI, tempDD);
+						RoomCell tempRC = new RoomCell(i, j, tempRI, tempDD);
 						cells.add(tempRC);
 					}
 					else {
-						WalkwayCell tempWC = new WalkwayCell();
+						WalkwayCell tempWC = new WalkwayCell(i, j);
 						cells.add(tempWC);
 					}
 				}
@@ -160,6 +161,78 @@ public class Board {
 	/* ------------------------------------------------- */
 	//logic from IntBoard class
 	public void calcAdjacencies() {
+		BoardCell current;
+		ArrayList<Integer> adjList;
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numColumns; j++) {
+				adjList = new ArrayList<Integer>();
+				current = getCell(calcIndex(i,j));
+				
+				if(checkAdjacency(calcIndex(i-1,j))){
+					adjList.add(i-1, j);
+				}
+				if(checkAdjacency(calcIndex(i+1,j))){
+					adjList.add(i+1, j);
+				}
+				if(checkAdjacency(calcIndex(i,j-1))){
+					adjList.add(i, j-1);
+				}
+				if(checkAdjacency(calcIndex(i,j+1))){
+					adjList.add(i, j+1);
+				}
+				
+				
+				adjMap.put(calcIndex(current.row, current.column), adjList);
+				
+			}
+			
+			
+			/*
+			//ArrayList<Integer> adjList = new ArrayList<Integer>();
+
+			//if i%numColumns == 0, increment row
+			if (i%numColumns == 0) {
+				adjList.add(i + 1);
+
+				if (i < (numRows*numColumns - numColumns)) {
+					adjList.add(i + numColumns);
+				}
+
+				if (i > 0) {
+					adjList.add(i - numColumns);
+				}
+			}
+			else if (i%numColumns > 0 && i%numColumns < (numColumns - 1)) {
+				adjList.add(i + 1);
+				adjList.add(i - 1);
+
+				if (i < (numRows*numColumns - numColumns)) {
+					adjList.add(i + numColumns);
+				}
+
+				if (i > 1) {
+					adjList.add(i - numColumns);
+				}
+			}
+			else if (i%numColumns == numColumns - 1) {
+				adjList.add(i - 1);
+
+				if (i < (numRows*numColumns - numColumns)) {
+					adjList.add(i + numColumns);
+				}
+
+				if (i > numColumns - 1) {
+					adjList.add(i - numColumns);
+				}
+			}
+
+			adjMap.put(i, adjList);
+			*/
+		}
+	}
+	
+	public boolean checkAdjacency(int index){
+		return false;
 	}
 	
 	public LinkedList<Integer> getAdjList(int cell){
