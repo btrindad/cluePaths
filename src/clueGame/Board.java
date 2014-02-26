@@ -19,12 +19,12 @@ public class Board {
 	private String legendFile;
 	
 	//check if these really need to be static
-	private static Map<Integer, ArrayList<Integer>> adjMap;
+	private static Map<Integer, HashSet<Integer>> adjMap;
 	private static boolean[] visited;
 	
 	public Board() {
 		cells = new ArrayList<BoardCell>();
-		adjMap = new HashMap<Integer, ArrayList<Integer>>();
+		adjMap = new HashMap<Integer, HashSet<Integer>>();
 		rooms = new HashMap<Character, String>();
 	}
 	
@@ -162,23 +162,23 @@ public class Board {
 	//logic from IntBoard class
 	public void calcAdjacencies() {
 		BoardCell current;
-		ArrayList<Integer> adjList;
+		HashSet<Integer> adjList;
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
-				adjList = new ArrayList<Integer>();
+				adjList = new HashSet<Integer>();
 				current = getCell(calcIndex(i,j));
 				
 				if(checkAdjacency(calcIndex(i-1,j))){
-					adjList.add(i-1, j);
+					adjList.add(calcIndex(i-1, j));
 				}
 				if(checkAdjacency(calcIndex(i+1,j))){
-					adjList.add(i+1, j);
+					adjList.add(calcIndex(i+1, j));
 				}
 				if(checkAdjacency(calcIndex(i,j-1))){
-					adjList.add(i, j-1);
+					adjList.add(calcIndex(i, j-1));
 				}
 				if(checkAdjacency(calcIndex(i,j+1))){
-					adjList.add(i, j+1);
+					adjList.add(calcIndex(i, j+1));
 				}
 				
 				
@@ -235,9 +235,8 @@ public class Board {
 		return false;
 	}
 	
-	public LinkedList<Integer> getAdjList(int cell){
-		//filler to prevent errors until implemented
-		return new LinkedList<Integer>();
+	public HashSet<Integer> getAdjList(int cell){
+		return adjMap.get(cell);
 	}
 	
 	/*
