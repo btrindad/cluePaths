@@ -1,9 +1,11 @@
 package test;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -316,6 +318,7 @@ public class BoardAdjTests {
 		// Take one step, essentially just the adj list
 		board.startTargets(6, 11, 1);
 		Set<Integer> targets= board.getTargets();
+		Set<Integer> adjList = board.getAdjList(board.calcIndex(6, 11));
 		// Ensure doesn't exit through the wall
 		Assert.assertEquals(1, targets.size());
 		int test = board.calcIndex(7, 11);

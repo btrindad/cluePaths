@@ -249,7 +249,7 @@ public class Board {
 			 */
 		}
 	}
-	
+
 
 	public boolean checkAdjacency(int index, int origin){
 		//System.out.println("numRows is: " + numRows);
@@ -257,13 +257,10 @@ public class Board {
 		//System.out.println("calcIndex returns: " + calcIndex(numRows, numColumns));
 		//System.out.println("size of board: " + cells.size());
 		//if(index < 0 || index >= cells.size()){ return false; }
-		
+
 		if(cells.get(origin).isRoom() && !cells.get(origin).isDoorway()) {
 			return false;
-		}
-		else if (cells.get(index).isWalkway()) {
-			return true;
-		} else if (cells.get(index).isRoom() && !cells.get(index).isDoorway()) {
+		}else if (cells.get(index).isRoom() && !cells.get(index).isDoorway()) {
 			return false;
 		}
 		else if (index == (origin + numColumns) && cells.get(index).isRoom()) {
@@ -301,11 +298,74 @@ public class Board {
 			else {
 				return false;
 			}
+		}else if (cells.get(index).isWalkway()) {
+			return true;
 		}
 		else {
 			return false;
 		}
 	}
+
+	/*
+	public boolean checkAdjacency(int index, int origin){
+		//first check that index is in bounds
+		if (index < 0 || index >= cells.size()) {
+			return false;
+		}
+
+		//in this version, movement in rooms is not allowed, therefore any room that is not
+		//a doorway has no adjacent spaces
+		if(getCell(index).isRoom() && !getCell(index).isDoorway()){	return false; }
+		else if (getCell(origin).isRoom() && !getCell(index).isDoorway()){ return false; }
+
+		//check first possibility, that origin is a walkway
+		else if (getCell(origin).isWalkway()){
+			//allow stepping from walkway to walkway
+			if(getCell(index).isWalkway()){ return true; }
+			//if we are stepping from walkway to doorway, we first check the direction
+			if(getCell(index).isDoorway()){
+				RoomCell current = (RoomCell) getCell(index);
+				switch (current.getDoorDirection()){
+				case UP: if((index-numColumns) == origin){ return true; }
+				break;
+				case DOWN: if((index+numColumns) == origin){ return true; }
+				break;
+				case LEFT: if((index-1)==origin && (index%numColumns != 0)){ return true; }
+				break;
+				case RIGHT: if((index+1)==origin && ((index+1)%numColumns != 0)){ return true; }
+				break;
+				default: return false;
+				}
+			}
+			else return false;
+		}
+		//finally if we are stepping from a doorway
+		else if (getCell(origin).isDoorway()){
+			//from door to floor is always alright
+			if(getCell(index).isWalkway()){
+				RoomCell current = (RoomCell) getCell(origin);
+				switch (current.getDoorDirection()){
+				case UP: if((origin-numColumns) == index){ return true; }
+				break;
+				case DOWN: if((origin+numColumns) == index){ return true; }
+				break;
+				case LEFT: if((origin-1)==index && (origin%numColumns != 0)){ return true; }
+				break;
+				case RIGHT: if((origin+1)==index && ((origin+1)%numColumns != 0)){ return true; }
+				break;
+				default: return false;
+				}
+			}
+			//in this version, we stop at the doorway. thus we never step from
+			//doorway to room, and we will never step from doorway to doorway
+			else { return false; }
+		}
+		//ever the pessimist, if we cannot determine that two cells are connected
+		//we will act as though they are not
+		return false;
+	}*/
+
+
 
 
 	//filler to prevent errors until implemented
@@ -320,7 +380,7 @@ public class Board {
 
 	}
 
-	
+
 	public void startTargets(int row, int column, int steps){
 		for(int i=0; i<visited.length; i++){
 			visited[i] = false;
@@ -331,31 +391,6 @@ public class Board {
 
 	public void calcTargets(int location, int steps){
 		visited[location] = true;
-		if(steps == 0 || getCell(location).isDoorway()){
-			targets.add(location);
-		}
-		else{
-			try{
-				if(!getAdjList(location).isEmpty()){
-					for(int adj : getAdjList(location)){
-						if(!visited[adj]){
-							calcTargets(adj, steps-1);
-						}
-					}
-				}
-			} catch (NullPointerException e){
-				System.out.println(e.getMessage());
-			}
-		}
-		visited[location] = false;
-	}
-
-	public void calcTargets1(int location, int steps){
-		System.out.println("location: " + location);
-		System.out.println("steps: " + steps);
-		System.out.println("visited[location] "+ visited[location]);
-		
-		visited[location] = true;
 		if(steps == 0){
 			targets.add(location);
 		}
@@ -364,7 +399,11 @@ public class Board {
 				if(!getAdjList(location).isEmpty()){
 					for(int adj : getAdjList(location)){
 						if(!visited[adj]){
-							calcTargets1(adj, steps-1);
+							if(getCell(adj).isDoorway()){
+								targets.add(location);
+							} else{
+								calcTargets(adj, steps-1);
+							}
 						}
 					}
 				}
@@ -375,7 +414,7 @@ public class Board {
 		visited[location] = false;
 	}
 
-	
+
 	public Set<Integer> getTargets(){
 		return targets;
 	}
