@@ -287,10 +287,10 @@ public class Board {
 	public LinkedList<Integer> getAdjList(int cell){
 		//filler to prevent errors until implemented
 
-		ArrayList<Integer> tempAdjList = adjMap.get(cell);
-		LinkedList<Integer> adjLinkList = new LinkedList<Integer>(tempAdjList);
+		//rrayList<Integer> tempAdjList = adjMap.get(cell);
+		//LinkedList<Integer> adjLinkList = new LinkedList<Integer>(tempAdjList);
 		//return adjLinkList;
-		//LinkedList<Integer> adjLinkList = new LinkedList<Integer>();
+		LinkedList<Integer> adjLinkList = new LinkedList<Integer>();
 		return adjLinkList;
 	}
 	
