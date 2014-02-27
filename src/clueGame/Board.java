@@ -316,12 +316,7 @@ public class Board {
 
 	}
 
-	/*
-	 * public static void calcTargets(int location, int steps, Set<Integer> targets){
-	}*/
-
-	//what is the third parameter supposed to be? the above commented out
-	//stub is from IntBoard
+	
 	public void startTargets(int row, int column, int steps){
 		for(int i=0; i<visited.length; i++){
 			visited[i] = false;
