@@ -19,18 +19,18 @@ public class Board {
 	private int numColumns;
 	private String layoutFile;
 	private String legendFile;
-	
+
 	//check if these really need to be static
 	private Map<Integer, HashSet<Integer>> adjMap;
 	private boolean[] visited;
 	private Set<Integer> targets;
-	
+
 	public Board() {
 		cells = new ArrayList<BoardCell>();
 		adjMap = new HashMap<Integer, HashSet<Integer>>();
 		rooms = new HashMap<Character, String>();
 	}
-	
+
 	public Board(String layout, String legend) {
 		cells = new ArrayList<BoardCell>();
 		rooms = new HashMap<Character, String>();
@@ -38,7 +38,7 @@ public class Board {
 		layoutFile = layout;
 		legendFile = legend;
 	}
-	
+
 	public void loadConfigFiles() {
 		try {
 			loadBoardConfig();
@@ -48,11 +48,11 @@ public class Board {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
 		FileReader reader = new FileReader(layoutFile);
 		Scanner inScan = new Scanner(reader);
-		
+
 		try {
 			int i = 0;
 			while (inScan.hasNext()) {
@@ -60,17 +60,17 @@ public class Board {
 				String[] queue = s.split(",");
 				if (queue.length != numColumns && (numColumns > 0)) {
 					throw new BadConfigFormatException("Problem with the format of the board file.");
-					
+
 				}
-				
+
 				numColumns = queue.length;
-				
+
 				for (int j=0; j<queue.length; j++) {
 					String t = queue[j];
 					if (!rooms.containsKey(t.charAt(0))) {
 						throw new BadConfigFormatException("Problem with the format of the board file: Invalid room key.");
 					}
-					
+
 					if (t != "W") {
 						char tempDD = 'N';
 						char tempRI = t.charAt(0);
@@ -78,7 +78,7 @@ public class Board {
 						if (t.length() > 1) {
 							tempDD = t.charAt(1);
 						}
-						
+
 						RoomCell tempRC = new RoomCell(i, j, tempRI, tempDD);
 						cells.add(tempRC);
 					}
@@ -94,18 +94,18 @@ public class Board {
 		finally {
 			inScan.close();
 		}
-		
+
 		//is it better to set this to the size of the board, or just the number of visitable areas?
 		visited = new boolean[cells.size()];
 		for(int i=0; i<visited.length; i++){
 			visited[i] = false;
 		}
 	}
-	
+
 	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
 		FileReader reader = new FileReader(legendFile);
 		Scanner inScan = new Scanner(reader);
-		
+
 		try {
 			while (inScan.hasNext()) {
 				String u = inScan.nextLine();
@@ -113,44 +113,44 @@ public class Board {
 				if (queue.length != 2) {
 					throw new BadConfigFormatException("Problem with the format of the room legend file.");
 				}
-				
+
 				//clean up whitespace from the value
 				queue[1] = queue[1].replaceFirst(" ", "");
-				
+
 				rooms.put(queue[0].charAt(0), queue[1]);
 			}
-			
+
 		}
 		finally {
 			inScan.close();
 		}
-		
+
 	}
-	
+
 	//returns legend
 	public Map<Character, String> getRooms(){
 		return rooms;
 	}
-	
+
 	public int calcIndex (int row, int column) {
 		return ((numColumns*row) + column);
 	}
-	
+
 	public BoardCell getCell(int location) {
 		return cells.get(location);
 	}
-	
+
 	public BoardCell getCell(int r, int c) {
 		int location = calcIndex(r, c);
 		return cells.get(location);
 	}
-	
+
 	public RoomCell getRoomCell(int r, int c) throws RuntimeException {
 		int location = calcIndex(r, c);
 		if (cells.get(location).isRoom()) {
 			return (RoomCell) cells.get(location);
 		}
-		
+
 		else { // We chose to handle a non-RoomCell situation by throwing a RuntimeException
 			throw new RuntimeException("The given location does not contain a RoomCell.");
 		}
@@ -160,15 +160,15 @@ public class Board {
 		c = Character.toUpperCase(c);
 		return rooms.get(c);
 	}
-	
+
 	public int getNumRows() {
 		return numRows;
 	}
-	
+
 	public int getNumColumns() {
 		return numColumns;
 	}
-	
+
 	/* ------------------------------------------------- */
 	//logic from IntBoard class
 	public void calcAdjacencies() {
@@ -182,15 +182,15 @@ public class Board {
 				if((i - 7) > 0 && checkAdjacency(calcIndex(i-1,j), calcIndex(i,j))){
 					adjList.add(calcIndex(i-1, j));
 				}
-				
+
 				if((i + 1) < numRows && checkAdjacency(calcIndex(i+1,j), calcIndex(i,j))){
 					adjList.add(calcIndex(i+1, j));
 				}
-				
+
 				if((j-1) > 0 && checkAdjacency(calcIndex(i,j-1), calcIndex(i,j))){
 					adjList.add(calcIndex(i, j-1));
 				}
-				
+
 				if((j+1) < numColumns && checkAdjacency(calcIndex(i,j+1), calcIndex(i,j))){
 					adjList.add(calcIndex(i, j+1));
 				}
@@ -198,8 +198,8 @@ public class Board {
 					adjMap.put(calcIndex(current.row, current.column), adjList);
 				}
 			}
-			
-			
+
+
 			/*
 			//ArrayList<Integer> adjList = new ArrayList<Integer>();
 
@@ -240,15 +240,16 @@ public class Board {
 			}
 
 			adjMap.put(i, adjList);
-			*/
+			 */
 		}
 	}
-	
+
 	public boolean checkAdjacency(int index, int origin){
 		System.out.println("numRows is: " + numRows);
 		System.out.println("numColumns is: " + numColumns);
 		System.out.println("calcIndex returns: " + calcIndex(numRows, numColumns));
-		if (index < 0 || index >= calcIndex(numRows, numColumns)) {
+		System.out.println("size of board: " + cells.size());
+		if (index < 0 || index >= cells.size()) {
 			return false;
 		}
 		else if (cells.get(index).isWalkway()) {
@@ -296,24 +297,24 @@ public class Board {
 			return false;
 		}
 	}
-	
 
-		//filler to prevent errors until implemented
 
-		//rrayList<Integer> tempAdjList = adjMap.get(cell);
-		//LinkedList<Integer> adjLinkList = new LinkedList<Integer>(tempAdjList);
-		//return adjLinkList;
-		//LinkedList<Integer> adjLinkList = new LinkedList<Integer>();
-		//return adjLinkList;
+	//filler to prevent errors until implemented
+
+	//rrayList<Integer> tempAdjList = adjMap.get(cell);
+	//LinkedList<Integer> adjLinkList = new LinkedList<Integer>(tempAdjList);
+	//return adjLinkList;
+	//LinkedList<Integer> adjLinkList = new LinkedList<Integer>();
+	//return adjLinkList;
 	public HashSet<Integer> getAdjList(int cell){
 		return adjMap.get(cell);
 
 	}
-	
+
 	/*
 	 * public static void calcTargets(int location, int steps, Set<Integer> targets){
 	}*/
-	
+
 	//what is the third parameter supposed to be? the above commented out
 	//stub is from IntBoard
 	public void startTargets(int row, int column, int steps){
@@ -323,25 +324,31 @@ public class Board {
 		targets.clear();
 		calcTargets(calcIndex(row, column), steps);
 	}
-	
+
 	public void calcTargets(int location, int steps){
 		visited[location] = true;
 		if(steps == 0){
 			targets.add(location);
 		}
 		else{
-			for(int adj : getAdjList(location)){
-				if(!visited[adj]){
-					calcTargets(adj, steps-1);
+			try{
+				if(!getAdjList(location).isEmpty()){
+					for(int adj : getAdjList(location)){
+						if(!visited[adj]){
+							calcTargets(adj, steps-1);
+						}
+					}
 				}
+			} catch (NullPointerException e){
+				System.out.println(e.getMessage());
 			}
 		}
 		visited[location] = false;
 	}
-	
+
 	public Set<Integer> getTargets(){
 		//filler to prevent errors
 		return targets;
 	}
-	
+
 }
