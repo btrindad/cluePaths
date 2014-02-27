@@ -194,8 +194,9 @@ public class Board {
 				if((j+1) < numColumns && checkAdjacency(calcIndex(i,j+1), calcIndex(i,j))){
 					adjList.add(calcIndex(i, j+1));
 				}
-				
-				adjMap.put(calcIndex(current.row, current.column), adjList);
+				if(!adjList.isEmpty()){
+					adjMap.put(calcIndex(current.row, current.column), adjList);
+				}
 			}
 			
 			
