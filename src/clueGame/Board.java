@@ -179,19 +179,19 @@ public class Board {
 				adjList = new HashSet<Integer>();
 				current = getCell(calcIndex(i,j));
 
-				if(checkAdjacency(calcIndex(i-1,j), calcIndex(i,j))){
+				if((i - 7) > 0 && checkAdjacency(calcIndex(i-1,j), calcIndex(i,j))){
 					adjList.add(calcIndex(i-1, j));
 				}
 				
-				if(checkAdjacency(calcIndex(i+1,j), calcIndex(i,j))){
+				if((i + 1) < numRows && checkAdjacency(calcIndex(i+1,j), calcIndex(i,j))){
 					adjList.add(calcIndex(i+1, j));
 				}
 				
-				if(checkAdjacency(calcIndex(i,j-1), calcIndex(i,j))){
+				if((j-1) > 0 && checkAdjacency(calcIndex(i,j-1), calcIndex(i,j))){
 					adjList.add(calcIndex(i, j-1));
 				}
 				
-				if(checkAdjacency(calcIndex(i,j+1), calcIndex(i,j))){
+				if((j+1) < numColumns && checkAdjacency(calcIndex(i,j+1), calcIndex(i,j))){
 					adjList.add(calcIndex(i, j+1));
 				}
 				
