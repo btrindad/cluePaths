@@ -19,12 +19,13 @@ public class Board {
 	private String legendFile;
 	
 	//check if these really need to be static
-	private static Map<Integer, ArrayList<Integer>> adjMap;
-	private static boolean[] visited;
+	private Map<Integer, HashSet<Integer>> adjMap;
+	private boolean[] visited;
+	private Set<Integer> targets;
 	
 	public Board() {
 		cells = new ArrayList<BoardCell>();
-		adjMap = new HashMap<Integer, ArrayList<Integer>>();
+		adjMap = new HashMap<Integer, HashSet<Integer>>();
 		rooms = new HashMap<Character, String>();
 	}
 	
@@ -89,6 +90,9 @@ public class Board {
 		finally {
 			inScan.close();
 		}
+		
+		//is it better to set this to the size of the board, or just the number of visitable areas?
+		visited = new boolean[cells.size()];
 	}
 	
 	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
@@ -162,23 +166,23 @@ public class Board {
 	//logic from IntBoard class
 	public void calcAdjacencies() {
 		BoardCell current;
-		ArrayList<Integer> adjList;
+		HashSet<Integer> adjList;
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
-				adjList = new ArrayList<Integer>();
+				adjList = new HashSet<Integer>();
 				current = getCell(calcIndex(i,j));
 				
 				if(checkAdjacency(calcIndex(i-1,j))){
-					adjList.add(i-1, j);
+					adjList.add(calcIndex(i-1, j));
 				}
 				if(checkAdjacency(calcIndex(i+1,j))){
-					adjList.add(i+1, j);
+					adjList.add(calcIndex(i+1, j));
 				}
 				if(checkAdjacency(calcIndex(i,j-1))){
-					adjList.add(i, j-1);
+					adjList.add(calcIndex(i, j-1));
 				}
 				if(checkAdjacency(calcIndex(i,j+1))){
-					adjList.add(i, j+1);
+					adjList.add(calcIndex(i, j+1));
 				}
 				
 				
@@ -235,9 +239,8 @@ public class Board {
 		return false;
 	}
 	
-	public LinkedList<Integer> getAdjList(int cell){
-		//filler to prevent errors until implemented
-		return new LinkedList<Integer>();
+	public HashSet<Integer> getAdjList(int cell){
+		return adjMap.get(cell);
 	}
 	
 	/*
@@ -246,8 +249,23 @@ public class Board {
 	
 	//what is the third parameter supposed to be? the above commented out
 	//stub is from IntBoard
-	public void calcTargets(int row, int column, int steps){
+	
+	public void startTargets(int location, int steps){
 		
+	}
+	public void calcTargets(int location, int steps){
+		visited[location] = true;
+		if(steps == 0){
+			targets.add(location);
+		}
+		else{
+			for(int adj : getAdjList(location)){
+				if(!visited[adj]){
+					calcTargets(adj, steps-1);
+				}
+			}
+		}
+		visited[location] = false;
 	}
 	
 	public Set<BoardCell> getTargets(){

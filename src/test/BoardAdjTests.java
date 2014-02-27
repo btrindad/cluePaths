@@ -1,5 +1,6 @@
 package test;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class BoardAdjTests {
 	public void testAdjacenciesInsideRooms()
 	{
 		// Test a corner
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(0, 0));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(0, 0));
 		Assert.assertEquals(0, testList.size());
 		// Test one that has walkway underneath
 		testList = board.getAdjList(board.calcIndex(6, 0));
@@ -55,7 +56,7 @@ public class BoardAdjTests {
 	public void testAdjacencyRoomExit()
 	{
 		// TEST DOORWAY RIGHT 
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(13, 4));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(13, 4));
 		Assert.assertEquals(1, testList.size());
 		Assert.assertTrue(testList.contains(board.calcIndex(13, 5)));
 		// TEST DOORWAY LEFT 
@@ -79,7 +80,7 @@ public class BoardAdjTests {
 	public void testAdjacencyDoorways_I()
 	{
 		// Test beside a door direction RIGHT
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(13, 5));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(13, 5));
 		Assert.assertTrue(testList.contains(board.calcIndex(13, 4)));
 		Assert.assertTrue(testList.contains(board.calcIndex(12, 5)));
 		Assert.assertTrue(testList.contains(board.calcIndex(14, 5)));
@@ -109,7 +110,7 @@ public class BoardAdjTests {
 	@Test
 	public void testAdjacencyDoorways_II() {
 		// Test beside a door that's not the right direction
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(5, 3));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(5, 3));
 		Assert.assertTrue(testList.contains(board.calcIndex(5, 2)));
 		Assert.assertTrue(testList.contains(board.calcIndex(5, 4)));
 		Assert.assertTrue(testList.contains(board.calcIndex(6, 3)));
@@ -123,7 +124,7 @@ public class BoardAdjTests {
 	public void testAdjacency4Walkways()
 	{
 		// Test surrounded by 4 walkways
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(15,7));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(15,7));
 		Assert.assertTrue(testList.contains(board.calcIndex(15, 8)));
 		Assert.assertTrue(testList.contains(board.calcIndex(15, 6)));
 		Assert.assertTrue(testList.contains(board.calcIndex(14, 7)));
@@ -134,7 +135,7 @@ public class BoardAdjTests {
 	@Test
 	public void testAdjacencyTopEdge() {
 		// Test on top edge of board
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(0, 5));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(0, 5));
 		Assert.assertTrue(testList.contains(6));
 		Assert.assertTrue(testList.contains(4));
 		Assert.assertEquals(2, testList.size());
@@ -143,7 +144,7 @@ public class BoardAdjTests {
 	@Test
 	public void testAdjacencyLeftEdge() {
 		// Test on left edge of board
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(8, 0));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(8, 0));
 		Assert.assertTrue(testList.contains(board.calcIndex(9, 0)));
 		Assert.assertTrue(testList.contains(board.calcIndex(8, 1)));
 		Assert.assertTrue(testList.contains(board.calcIndex(7, 0)));
@@ -153,7 +154,7 @@ public class BoardAdjTests {
 	@Test
 	public void testAdjacencyRoomCells() {
 		// Test between two rooms, walkways right and left
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(8, 20));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(8, 20));
 		Assert.assertTrue(testList.contains(board.calcIndex(8, 21)));
 		Assert.assertTrue(testList.contains(board.calcIndex(8, 19)));
 		Assert.assertEquals(2, testList.size());
@@ -162,7 +163,7 @@ public class BoardAdjTests {
 	@Test
 	public void testAdjacencyBottomEdge() {
 		// Test on bottom edge of board, next to 1 room piece
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(21, 5));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(21, 5));
 		Assert.assertTrue(testList.contains(board.calcIndex(21, 6)));
 		Assert.assertTrue(testList.contains(board.calcIndex(20, 5)));
 		Assert.assertEquals(2, testList.size());
@@ -171,7 +172,7 @@ public class BoardAdjTests {
 	@Test
 	public void testAdjacencyRightEdge() {
 		// Test on right edge of board, next to 1 room piece
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(14, 22));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(14, 22));
 		Assert.assertTrue(testList.contains(board.calcIndex(14, 21)));
 		Assert.assertTrue(testList.contains(board.calcIndex(15, 22)));
 		Assert.assertEquals(2, testList.size());
@@ -181,7 +182,7 @@ public class BoardAdjTests {
 	public void testAdjacencyDoorwayWrongDirection() {
 		// Test on walkway next to  door that is not in the needed
 		// direction to enter
-		LinkedList<Integer> testList = board.getAdjList(board.calcIndex(5, 16));
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(5, 16));
 		Assert.assertTrue(testList.contains(board.calcIndex(4, 16)));
 		Assert.assertTrue(testList.contains(board.calcIndex(5, 15)));
 		Assert.assertTrue(testList.contains(board.calcIndex(6, 16)));
