@@ -255,6 +255,7 @@ public class Board {
 		//System.out.println("numColumns is: " + numColumns);
 		//System.out.println("calcIndex returns: " + calcIndex(numRows, numColumns));
 		//System.out.println("size of board: " + cells.size());
+		//if(index < 0 || index >= cells.size()){ return false; }
 		
 		if(cells.get(origin).isRoom() && !cells.get(origin).isDoorway()) {
 			return false;
@@ -349,7 +350,6 @@ public class Board {
 	}
 
 	public Set<Integer> getTargets(){
-		System.out.println("HI");
 		return targets;
 	}
 
