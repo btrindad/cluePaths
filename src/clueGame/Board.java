@@ -34,6 +34,7 @@ public class Board {
 	public Board(String layout, String legend) {
 		cells = new ArrayList<BoardCell>();
 		rooms = new HashMap<Character, String>();
+		adjMap = new HashMap<Integer, HashSet<Integer>>();
 		layoutFile = layout;
 		legendFile = legend;
 	}
