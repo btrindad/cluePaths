@@ -123,7 +123,7 @@ public class Board {
 		return rooms;
 	}
 	
-	public int calcIndex (int row, int column) {;
+	public int calcIndex (int row, int column) {
 		return ((numColumns*row) + column);
 	}
 	
@@ -171,16 +171,19 @@ public class Board {
 				current = getCell(calcIndex(i,j));
 				
 				if(checkAdjacency(calcIndex(i-1,j), calcIndex(i,j))){
-					adjList.add(i-1, j);
+					adjList.add(calcIndex(i-1, j));
 				}
+				
 				if(checkAdjacency(calcIndex(i+1,j), calcIndex(i,j))){
-					adjList.add(i+1, j);
+					adjList.add(calcIndex(i+1, j));
 				}
+				
 				if(checkAdjacency(calcIndex(i,j-1), calcIndex(i,j))){
-					adjList.add(i, j-1);
+					adjList.add(calcIndex(i, j-1));
 				}
+				
 				if(checkAdjacency(calcIndex(i,j+1), calcIndex(i,j))){
-					adjList.add(i, j+1);
+					adjList.add(calcIndex(i, j+1));
 				}
 				
 				adjMap.put(calcIndex(current.row, current.column), adjList);
@@ -232,12 +235,15 @@ public class Board {
 	}
 	
 	public boolean checkAdjacency(int index, int origin){
-		if (cells.get(index).isWalkway()) {
+		if (index < 0 || index >= calcIndex(numRows, numColumns)) {
+			return false;
+		}
+		else if (cells.get(index).isWalkway()) {
 			return true;
 		} else if (cells.get(index).isRoom() && !cells.get(index).isDoorway()) {
 			return false;
 		}
-		else if (index == origin + numColumns && cells.get(index).isRoom()) {
+		else if (index == (origin + numColumns) && cells.get(index).isRoom()) {
 			RoomCell tRC = (RoomCell)cells.get(index);
 			if (tRC.getDoorDirection() == DoorDirection.UP) {
 				return true;
@@ -246,7 +252,7 @@ public class Board {
 				return false;
 			}
 		}
-		else if (index == origin - numColumns && cells.get(index).isRoom()) {
+		else if (index == (origin - numColumns) && cells.get(index).isRoom()) {
 			RoomCell tRC = (RoomCell)cells.get(index);
 			if (tRC.getDoorDirection() == DoorDirection.DOWN) {
 				return true;
@@ -255,7 +261,7 @@ public class Board {
 				return false;
 			}
 		}
-		else if (index == origin + 1 && cells.get(index).isRoom()) {
+		else if (index == (origin + 1) && cells.get(index).isRoom()) {
 			RoomCell tRC = (RoomCell)cells.get(index);
 			if (tRC.getDoorDirection() == DoorDirection.LEFT) {
 				return true;
@@ -264,7 +270,7 @@ public class Board {
 				return false;
 			}
 		}
-		else if (index == origin - 1 && cells.get(index).isRoom()) {
+		else if (index == (origin - 1) && cells.get(index).isRoom()) {
 			RoomCell tRC = (RoomCell)cells.get(index);
 			if (tRC.getDoorDirection() == DoorDirection.RIGHT) {
 				return true;
@@ -280,7 +286,12 @@ public class Board {
 	
 	public LinkedList<Integer> getAdjList(int cell){
 		//filler to prevent errors until implemented
-		return new LinkedList<Integer>();
+
+		ArrayList<Integer> tempAdjList = adjMap.get(cell);
+		LinkedList<Integer> adjLinkList = new LinkedList<Integer>(tempAdjList);
+		//return adjLinkList;
+		//LinkedList<Integer> adjLinkList = new LinkedList<Integer>();
+		return adjLinkList;
 	}
 	
 	/*
