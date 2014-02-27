@@ -27,6 +27,7 @@ public class BoardAdjTests {
 	@Test
 	public void testAdjacenciesInsideRooms()
 	{
+		
 		// Test a corner
 		HashSet<Integer> testList = board.getAdjList(board.calcIndex(0, 0));
 		Assert.assertEquals(0, testList.size());

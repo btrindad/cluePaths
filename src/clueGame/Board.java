@@ -245,6 +245,9 @@ public class Board {
 	}
 	
 	public boolean checkAdjacency(int index, int origin){
+		System.out.println("numRows is: " + numRows);
+		System.out.println("numColumns is: " + numColumns);
+		System.out.println("calcIndex returns: " + calcIndex(numRows, numColumns));
 		if (index < 0 || index >= calcIndex(numRows, numColumns)) {
 			return false;
 		}
