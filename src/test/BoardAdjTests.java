@@ -1,7 +1,6 @@
 package test;
 
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -196,13 +195,13 @@ public class BoardAdjTests {
 	// These are LIGHT BLUE on the planning spreadsheet
 	@Test
 	public void testTargetsOneStep() {
-		board.calcTargets(21, 6, 1);
-		Set<BoardCell> targets= board.getTargets();
+		board.calcTargets(board.calcIndex(21, 6), 1);
+		Set<Integer> targets= board.getTargets();
 		Assert.assertEquals(2, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(20, 7))));
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(21, 5))));	
 		
-		board.calcTargets(15, 0, 1);
+		board.calcTargets(board.calcIndex(15, 0), 1);
 		targets= board.getTargets();
 		Assert.assertEquals(2, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(14, 0))));
@@ -212,13 +211,13 @@ public class BoardAdjTests {
 	// These are LIGHT BLUE on the planning spreadsheet
 	@Test
 	public void testTargetsTwoSteps() {
-		board.calcTargets(21, 6, 2);
-		Set<BoardCell> targets= board.getTargets();
+		board.calcTargets(board.calcIndex(21, 6), 2);
+		Set<Integer> targets= board.getTargets();
 		Assert.assertEquals(2, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(19, 6))));
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(20, 5))));
 		
-		board.calcTargets(14, 0, 2);
+		board.calcTargets(board.calcIndex(14, 0), 2);
 		targets= board.getTargets();
 		Assert.assertEquals(1, targets.size());	
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(15, 1))));			
@@ -227,14 +226,14 @@ public class BoardAdjTests {
 	// These are LIGHT BLUE on the planning spreadsheet
 	@Test
 	public void testTargetsFourSteps() {
-		board.calcTargets(21, 6, 4);
-		Set<BoardCell> targets= board.getTargets();
+		board.calcTargets(board.calcIndex(21, 6), 4);
+		Set<Integer> targets= board.getTargets();
 		Assert.assertEquals(2, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(17, 6))));
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(18, 5))));
 		
 		// Includes a path that doesn't have enough length
-		board.calcTargets(15, 1, 4);
+		board.calcTargets(board.calcIndex(15, 1), 4);
 		targets= board.getTargets();
 		Assert.assertEquals(2, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(16, 4))));
@@ -245,8 +244,8 @@ public class BoardAdjTests {
 
 	@Test
 	public void testTargetsSixSteps() { // All test functions up to here updated
-		board.calcTargets(6, 10, 6);
-		Set<BoardCell> targets= board.getTargets();
+		board.calcTargets(board.calcIndex(6, 10), 6);
+		Set<Integer> targets= board.getTargets();
 		Assert.assertEquals(8, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(2, 9))));
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(0, 10))));	
@@ -264,8 +263,8 @@ public class BoardAdjTests {
 	public void testTargetsIntoRoom()
 	{
 		// One room is exactly 2 away
-		board.calcTargets(6, 6, 2);
-		Set<BoardCell> targets= board.getTargets();
+		board.calcTargets(board.calcIndex(6, 6), 2);
+		Set<Integer> targets= board.getTargets();
 		Assert.assertEquals(5, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 5))));
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(8, 6))));
@@ -279,8 +278,8 @@ public class BoardAdjTests {
 	@Test
 	public void testTargetsIntoRoomShortcut() 
 	{
-		board.calcTargets(8, 16, 4);
-		Set<BoardCell> targets= board.getTargets();
+		board.calcTargets(board.calcIndex(8, 16), 4);
+		Set<Integer> targets= board.getTargets();
 		Assert.assertEquals(14, targets.size());
 		
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(4, 16))));
@@ -308,13 +307,13 @@ public class BoardAdjTests {
 	public void testRoomExit()
 	{
 		// Take one step, essentially just the adj list
-		board.calcTargets(6, 11, 1);
-		Set<BoardCell> targets= board.getTargets();
+		board.calcTargets(board.calcIndex(6, 11), 1);
+		Set<Integer> targets= board.getTargets();
 		// Ensure doesn't exit through the wall
 		Assert.assertEquals(1, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(7, 11))));
 		// Take two steps
-		board.calcTargets(6, 11, 2);
+		board.calcTargets(board.calcIndex(6, 11), 2);
 		targets= board.getTargets();
 		Assert.assertEquals(3, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(8, 11))));

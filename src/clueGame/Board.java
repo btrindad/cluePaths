@@ -57,6 +57,7 @@ public class Board {
 				String[] queue = s.split(",");
 				if (queue.length != numColumns && (numColumns > 0)) {
 					throw new BadConfigFormatException("Problem with the format of the board file.");
+					
 				}
 				
 				numColumns = queue.length;
@@ -93,6 +94,9 @@ public class Board {
 		
 		//is it better to set this to the size of the board, or just the number of visitable areas?
 		visited = new boolean[cells.size()];
+		for(int i=0; i<visited.length; i++){
+			visited[i] = false;
+		}
 	}
 	
 	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
@@ -249,10 +253,14 @@ public class Board {
 	
 	//what is the third parameter supposed to be? the above commented out
 	//stub is from IntBoard
-	
-	public void startTargets(int location, int steps){
-		
+	public void startTargets(int row, int column, int steps){
+		for(int i=0; i<visited.length; i++){
+			visited[i] = false;
+		}
+		targets.clear();
+		calcTargets(calcIndex(row, column), steps);
 	}
+	
 	public void calcTargets(int location, int steps){
 		visited[location] = true;
 		if(steps == 0){
@@ -268,9 +276,9 @@ public class Board {
 		visited[location] = false;
 	}
 	
-	public Set<BoardCell> getTargets(){
+	public Set<Integer> getTargets(){
 		//filler to prevent errors
-		return new HashSet<BoardCell>();
+		return targets;
 	}
 	
 }
