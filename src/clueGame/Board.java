@@ -257,7 +257,10 @@ public class Board {
 		//System.out.println("calcIndex returns: " + calcIndex(numRows, numColumns));
 		//System.out.println("size of board: " + cells.size());
 		
-		if (cells.get(index).isWalkway()) {
+		if(cells.get(origin).isRoom() && !cells.get(origin).isDoorway()) {
+			return false;
+		}
+		else if (cells.get(index).isWalkway()) {
 			return true;
 		} else if (cells.get(index).isRoom() && !cells.get(index).isDoorway()) {
 			return false;
