@@ -21,12 +21,13 @@ public class Board {
 	private String legendFile;
 	
 	//check if these really need to be static
-	private static Map<Integer, ArrayList<Integer>> adjMap;
-	private static boolean[] visited;
+	private Map<Integer, HashSet<Integer>> adjMap;
+	private boolean[] visited;
+	private Set<Integer> targets;
 	
 	public Board() {
 		cells = new ArrayList<BoardCell>();
-		adjMap = new HashMap<Integer, ArrayList<Integer>>();
+		adjMap = new HashMap<Integer, HashSet<Integer>>();
 		rooms = new HashMap<Character, String>();
 	}
 	
@@ -58,6 +59,7 @@ public class Board {
 				String[] queue = s.split(",");
 				if (queue.length != numColumns && (numColumns > 0)) {
 					throw new BadConfigFormatException("Problem with the format of the board file.");
+					
 				}
 				
 				numColumns = queue.length;
@@ -90,6 +92,12 @@ public class Board {
 		}
 		finally {
 			inScan.close();
+		}
+		
+		//is it better to set this to the size of the board, or just the number of visitable areas?
+		visited = new boolean[cells.size()];
+		for(int i=0; i<visited.length; i++){
+			visited[i] = false;
 		}
 	}
 	
@@ -164,12 +172,12 @@ public class Board {
 	//logic from IntBoard class
 	public void calcAdjacencies() {
 		BoardCell current;
-		ArrayList<Integer> adjList;
+		HashSet<Integer> adjList;
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
-				adjList = new ArrayList<Integer>();
+				adjList = new HashSet<Integer>();
 				current = getCell(calcIndex(i,j));
-				
+
 				if(checkAdjacency(calcIndex(i-1,j), calcIndex(i,j))){
 					adjList.add(calcIndex(i-1, j));
 				}
@@ -284,14 +292,17 @@ public class Board {
 		}
 	}
 	
-	public LinkedList<Integer> getAdjList(int cell){
+
 		//filler to prevent errors until implemented
 
 		//rrayList<Integer> tempAdjList = adjMap.get(cell);
 		//LinkedList<Integer> adjLinkList = new LinkedList<Integer>(tempAdjList);
 		//return adjLinkList;
-		LinkedList<Integer> adjLinkList = new LinkedList<Integer>();
-		return adjLinkList;
+		//LinkedList<Integer> adjLinkList = new LinkedList<Integer>();
+		//return adjLinkList;
+	public HashSet<Integer> getAdjList(int cell){
+		return adjMap.get(cell);
+
 	}
 	
 	/*
@@ -300,13 +311,32 @@ public class Board {
 	
 	//what is the third parameter supposed to be? the above commented out
 	//stub is from IntBoard
-	public void calcTargets(int row, int column, int steps){
-		
+	public void startTargets(int row, int column, int steps){
+		for(int i=0; i<visited.length; i++){
+			visited[i] = false;
+		}
+		targets.clear();
+		calcTargets(calcIndex(row, column), steps);
 	}
 	
-	public Set<BoardCell> getTargets(){
+	public void calcTargets(int location, int steps){
+		visited[location] = true;
+		if(steps == 0){
+			targets.add(location);
+		}
+		else{
+			for(int adj : getAdjList(location)){
+				if(!visited[adj]){
+					calcTargets(adj, steps-1);
+				}
+			}
+		}
+		visited[location] = false;
+	}
+	
+	public Set<Integer> getTargets(){
 		//filler to prevent errors
-		return new HashSet<BoardCell>();
+		return targets;
 	}
 	
 }
