@@ -33,6 +33,7 @@ public class BoardAdjTests {
 		Assert.assertEquals(0, testList.size());
 		// Test one that has walkway underneath
 		testList = board.getAdjList(board.calcIndex(6, 0));
+		System.out.println("Dumb list: " + testList);
 		Assert.assertEquals(0, testList.size());
 		// Test one that has walkway above
 		testList = board.getAdjList(board.calcIndex(16, 20));
@@ -110,12 +111,12 @@ public class BoardAdjTests {
 	@Test
 	public void testAdjacencyDoorways_II() {
 		// Test beside a door that's not the right direction
-		HashSet<Integer> testList = board.getAdjList(board.calcIndex(5, 3));
-		Assert.assertTrue(testList.contains(board.calcIndex(5, 2)));
-		Assert.assertTrue(testList.contains(board.calcIndex(5, 4)));
-		Assert.assertTrue(testList.contains(board.calcIndex(6, 3)));
-		// This ensures we haven't included cell (4, 3) which is a doorway
-		Assert.assertEquals(3, testList.size());		
+		HashSet<Integer> testList = board.getAdjList(board.calcIndex(17, 17));
+		System.out.println("Another dumb list: " + testList);
+		Assert.assertTrue(testList.contains(board.calcIndex(16, 17)));
+		Assert.assertTrue(testList.contains(board.calcIndex(17, 16)));;
+		// This ensures we haven't included cell (18, 17) which is a doorway
+		Assert.assertEquals(2, testList.size());		
 	}
 
 	// Test a variety of walkway scenarios
