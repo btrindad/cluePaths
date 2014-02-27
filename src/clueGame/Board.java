@@ -35,6 +35,7 @@ public class Board {
 		cells = new ArrayList<BoardCell>();
 		rooms = new HashMap<Character, String>();
 		adjMap = new HashMap<Integer, HashSet<Integer>>();
+		targets = new HashSet<Integer>();
 		layoutFile = layout;
 		legendFile = legend;
 	}
@@ -83,9 +84,7 @@ public class Board {
 						cells.add(tempRC);
 					}
 					else {
-						System.out.println("HI");
 						WalkwayCell tempWC = new WalkwayCell(i, j);
-						System.out.println("tempWC is walkway: " + tempWC.isWalkway());
 						cells.add(tempWC);
 					}
 				}
@@ -319,12 +318,7 @@ public class Board {
 
 	}
 
-	/*
-	 * public static void calcTargets(int location, int steps, Set<Integer> targets){
-	}*/
-
-	//what is the third parameter supposed to be? the above commented out
-	//stub is from IntBoard
+	
 	public void startTargets(int row, int column, int steps){
 		for(int i=0; i<visited.length; i++){
 			visited[i] = false;
@@ -355,7 +349,7 @@ public class Board {
 	}
 
 	public Set<Integer> getTargets(){
-		//filler to prevent errors
+		System.out.println("HI");
 		return targets;
 	}
 
