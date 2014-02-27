@@ -5,9 +5,9 @@ public class RoomCell extends BoardCell{
 	private DoorDirection doorDirection;
 	private char roomInitial;
 	
-	public RoomCell(char r, char direction) {
-		super();
-		roomInitial = r;
+	public RoomCell(int r, int c, char i, char direction) {
+		super(r, c);
+		roomInitial = i;
 		
 		if (direction == 'U') {
 			doorDirection = DoorDirection.UP;
