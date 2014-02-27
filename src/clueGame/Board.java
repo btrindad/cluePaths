@@ -249,6 +249,7 @@ public class Board {
 			 */
 		}
 	}
+	
 
 	public boolean checkAdjacency(int index, int origin){
 		//System.out.println("numRows is: " + numRows);
@@ -330,7 +331,7 @@ public class Board {
 
 	public void calcTargets(int location, int steps){
 		visited[location] = true;
-		if(steps == 0){
+		if(steps == 0 || getCell(location).isDoorway()){
 			targets.add(location);
 		}
 		else{
