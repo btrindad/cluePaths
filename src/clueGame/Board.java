@@ -34,6 +34,7 @@ public class Board {
 	public Board(String layout, String legend) {
 		cells = new ArrayList<BoardCell>();
 		rooms = new HashMap<Character, String>();
+		adjMap = new HashMap<Integer, HashSet<Integer>>();
 		layoutFile = layout;
 		legendFile = legend;
 	}
@@ -193,8 +194,9 @@ public class Board {
 				if(checkAdjacency(calcIndex(i,j+1), calcIndex(i,j))){
 					adjList.add(calcIndex(i, j+1));
 				}
-				
-				adjMap.put(calcIndex(current.row, current.column), adjList);
+				if(!adjList.isEmpty()){
+					adjMap.put(calcIndex(current.row, current.column), adjList);
+				}
 			}
 			
 			
