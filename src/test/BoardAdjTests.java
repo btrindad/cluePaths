@@ -200,18 +200,21 @@ public class BoardAdjTests {
 	// These are LIGHT BLUE on the planning spreadsheet
 	@Test
 	public void testTargetsOneStep() {
-		board.calcTargets(board.calcIndex(21, 6), 1);
-		Set<Integer> targets= board.getTargets();
+		System.out.println("a list: " + board.getTargets());
+		board.startTargets(21, 6, 1);
+		Set<Integer> targets = board.getTargets();
 		System.out.println("Dah list: " + board.getTargets());
+		System.out.println(board.calcIndex(20, 6));
+		System.out.println(board.calcIndex(21, 5));
 		Assert.assertEquals(2, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(20, 7))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(21, 5))));	
+		Assert.assertTrue(targets.contains(board.calcIndex(20, 6)));
+		Assert.assertTrue(targets.contains(board.calcIndex(21, 5)));	
 		
-		board.calcTargets(board.calcIndex(15, 0), 1);
-		targets= board.getTargets();
+		board.startTargets(15, 0, 1);
+		targets = board.getTargets();
 		Assert.assertEquals(2, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(14, 0))));
-		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(15, 1))));			
+		Assert.assertTrue(targets.contains(board.calcIndex(14, 0)));
+		Assert.assertTrue(targets.contains(board.calcIndex(15, 1)));			
 	}
 	// Tests of just walkways, 2 steps
 	// These are LIGHT BLUE on the planning spreadsheet
