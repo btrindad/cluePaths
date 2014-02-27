@@ -349,6 +349,32 @@ public class Board {
 		visited[location] = false;
 	}
 
+	public void calcTargets1(int location, int steps){
+		System.out.println("location: " + location);
+		System.out.println("steps: " + steps);
+		System.out.println("visited[location] "+ visited[location]);
+		
+		visited[location] = true;
+		if(steps == 0){
+			targets.add(location);
+		}
+		else{
+			try{
+				if(!getAdjList(location).isEmpty()){
+					for(int adj : getAdjList(location)){
+						if(!visited[adj]){
+							calcTargets1(adj, steps-1);
+						}
+					}
+				}
+			} catch (NullPointerException e){
+				System.out.println(e.getMessage());
+			}
+		}
+		visited[location] = false;
+	}
+
+	
 	public Set<Integer> getTargets(){
 		return targets;
 	}
