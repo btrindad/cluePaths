@@ -202,6 +202,7 @@ public class BoardAdjTests {
 	public void testTargetsOneStep() {
 		board.calcTargets(board.calcIndex(21, 6), 1);
 		Set<Integer> targets= board.getTargets();
+		System.out.println("Dah list: " + board.getTargets());
 		Assert.assertEquals(2, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(20, 7))));
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(21, 5))));	
