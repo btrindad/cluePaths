@@ -124,7 +124,9 @@ public class BoardAdjTests {
 	public void testAdjacency4Walkways()
 	{
 		// Test surrounded by 4 walkways
-		HashSet<Integer> testList = board.getAdjList(board.calcIndex(15,7));
+		System.out.println("Test1: " + board.calcIndex(15, 7));
+		System.out.println("Test2: " + board.getAdjList(board.calcIndex(15, 7)));
+		HashSet<Integer> testList = new HashSet<Integer>(board.getAdjList(board.calcIndex(15,7)));
 		Assert.assertTrue(testList.contains(board.calcIndex(15, 8)));
 		Assert.assertTrue(testList.contains(board.calcIndex(15, 6)));
 		Assert.assertTrue(testList.contains(board.calcIndex(14, 7)));
@@ -135,6 +137,7 @@ public class BoardAdjTests {
 	@Test
 	public void testAdjacencyTopEdge() {
 		// Test on top edge of board
+		System.out.println("adjListTopEdge: " + board.getAdjList(board.calcIndex(0, 5)));
 		HashSet<Integer> testList = board.getAdjList(board.calcIndex(0, 5));
 		Assert.assertTrue(testList.contains(6));
 		Assert.assertTrue(testList.contains(4));

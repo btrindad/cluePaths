@@ -71,7 +71,7 @@ public class Board {
 						throw new BadConfigFormatException("Problem with the format of the board file: Invalid room key.");
 					}
 
-					if (t != "W") {
+					if (t.charAt(0) != 'W') {
 						char tempDD = 'N';
 						char tempRI = t.charAt(0);
 
@@ -83,7 +83,9 @@ public class Board {
 						cells.add(tempRC);
 					}
 					else {
+						System.out.println("HI");
 						WalkwayCell tempWC = new WalkwayCell(i, j);
+						System.out.println("tempWC is walkway: " + tempWC.isWalkway());
 						cells.add(tempWC);
 					}
 				}
@@ -179,24 +181,29 @@ public class Board {
 				adjList = new HashSet<Integer>();
 				current = getCell(calcIndex(i,j));
 
-				if((i - 7) > 0 && checkAdjacency(calcIndex(i-1,j), calcIndex(i,j))){
+				if((i - 1) > 0 && checkAdjacency(calcIndex(i-1,j), calcIndex(i,j))){
 					adjList.add(calcIndex(i-1, j));
+					//System.out.println("adjList: " + i + "," + j + ": " + adjList);
 				}
 
 				if((i + 1) < numRows && checkAdjacency(calcIndex(i+1,j), calcIndex(i,j))){
 					adjList.add(calcIndex(i+1, j));
+					//System.out.println("adjList: " + i + "," + j + ": " + adjList);
 				}
 
 				if((j-1) > 0 && checkAdjacency(calcIndex(i,j-1), calcIndex(i,j))){
 					adjList.add(calcIndex(i, j-1));
+					//System.out.println("adjList: " + i + "," + j + ": " + adjList);
 				}
 
 				if((j+1) < numColumns && checkAdjacency(calcIndex(i,j+1), calcIndex(i,j))){
 					adjList.add(calcIndex(i, j+1));
+					//System.out.println("adjList: " + i + "," + j + ": " + adjList);
 				}
-				if(!adjList.isEmpty()){
-					adjMap.put(calcIndex(current.row, current.column), adjList);
-				}
+				//System.out.println("adjList: " + i + "," + j + ": " + adjList);
+
+				adjMap.put(calcIndex(current.row, current.column), adjList);
+
 			}
 
 
@@ -245,14 +252,12 @@ public class Board {
 	}
 
 	public boolean checkAdjacency(int index, int origin){
-		System.out.println("numRows is: " + numRows);
-		System.out.println("numColumns is: " + numColumns);
-		System.out.println("calcIndex returns: " + calcIndex(numRows, numColumns));
-		System.out.println("size of board: " + cells.size());
-		if (index < 0 || index >= cells.size()) {
-			return false;
-		}
-		else if (cells.get(index).isWalkway()) {
+		//System.out.println("numRows is: " + numRows);
+		//System.out.println("numColumns is: " + numColumns);
+		//System.out.println("calcIndex returns: " + calcIndex(numRows, numColumns));
+		//System.out.println("size of board: " + cells.size());
+		
+		if (cells.get(index).isWalkway()) {
 			return true;
 		} else if (cells.get(index).isRoom() && !cells.get(index).isDoorway()) {
 			return false;
