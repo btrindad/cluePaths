@@ -283,8 +283,10 @@ public class BoardAdjTests {
 	@Test
 	public void testTargetsIntoRoomShortcut() 
 	{
-		board.calcTargets(board.calcIndex(8, 16), 4);
+		board.startTargets(8, 16, 4);
+		//board.calcTargets(board.calcIndex(8, 16), 4);
 		Set<Integer> targets= board.getTargets();
+		System.out.println(targets.toString());
 		Assert.assertEquals(14, targets.size());
 		
 		Assert.assertTrue(targets.contains(board.getCell(board.calcIndex(4, 16))));
