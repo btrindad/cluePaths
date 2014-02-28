@@ -400,6 +400,8 @@ public class Board {
 					for(int adj : getAdjList(location)){
 						if(!visited[adj]){
 							if(getCell(adj).isDoorway()){
+								
+								
 								targets.add(location);
 							} else{
 								calcTargets(adj, steps-1);
@@ -414,6 +416,10 @@ public class Board {
 		visited[location] = false;
 	}
 
+	//this function checks if from a given cell, if the given door can be entered from the direction
+	public boolean checkDoorDirection(BoardCell current, BoardCell door){
+		return false;
+	}
 
 	public Set<Integer> getTargets(){
 		return targets;
