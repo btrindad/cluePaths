@@ -262,17 +262,32 @@ public class BoardAdjTests {
 	@Test
 	public void testTargetsSixSteps() {
 		board.startTargets(6, 10, 6);
+		System.out.println("2, 10 adj: " + board.getAdjList(board.calcIndex(2, 10)));
+		
 		System.out.println("target list 6: " + board.getTargets());
 		Set<Integer> targets= board.getTargets();
-		Assert.assertEquals(8, targets.size());
-		Assert.assertTrue(targets.contains(board.calcIndex(2, 9)));
-		Assert.assertTrue(targets.contains(board.calcIndex(0, 10)));	
+		System.out.println(board.calcIndex(0, 10));
+		System.out.println(board.calcIndex(2, 9));
+		System.out.println(board.calcIndex(6, 11));
+		System.out.println(board.getAdjList(33));
+		System.out.println(board.getAdjList(29));
+		Assert.assertTrue(targets.contains(board.calcIndex(0, 10)));
 		Assert.assertTrue(targets.contains(board.calcIndex(6, 11)));	
-		Assert.assertTrue(targets.contains(board.calcIndex(6, 6)));	
+		Assert.assertTrue(targets.contains(board.calcIndex(6, 6)));
 		Assert.assertTrue(targets.contains(board.calcIndex(7, 5)));	
 		Assert.assertTrue(targets.contains(board.calcIndex(8, 6)));	
 		Assert.assertTrue(targets.contains(board.calcIndex(7, 15)));
 		Assert.assertTrue(targets.contains(board.calcIndex(8, 14)));
+		Assert.assertTrue(targets.contains(board.calcIndex(2, 9)));
+		Assert.assertTrue(targets.contains(board.calcIndex(7, 9)));
+		Assert.assertTrue(targets.contains(board.calcIndex(7, 13)));
+		Assert.assertTrue(targets.contains(board.calcIndex(8, 12)));
+		Assert.assertTrue(targets.contains(board.calcIndex(7, 11)));
+		Assert.assertTrue(targets.contains(board.calcIndex(8, 10)));
+		Assert.assertTrue(targets.contains(board.calcIndex(8, 8)));
+		Assert.assertTrue(targets.contains(board.calcIndex(7, 7)));
+		Assert.assertEquals(15, targets.size());
+
 	}	
 	
 	// Test getting into a room
