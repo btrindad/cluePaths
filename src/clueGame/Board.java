@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import clueGame.RoomCell.DoorDirection;
-
 public class Board {
 	private ArrayList<BoardCell> cells;
 	private Map<Character,String> rooms;
@@ -203,54 +201,21 @@ public class Board {
 
 
 	public boolean checkAdjacency(int index, int origin){
-		
+
 		if (cells.get(index).isWalkway()) {
 			if (cells.get(origin).isWalkway()) {
 				return true;
 			}
 			else if (cells.get(origin).isDoorway()) {
-				RoomCell oRoomCell = (RoomCell)cells.get(origin);
-				if (oRoomCell.getDoorDirection() == DoorDirection.DOWN && index == origin + numColumns) {
-					return true;
-				}
-				else if (oRoomCell.getDoorDirection() == DoorDirection.UP && index == origin - numColumns) {
-					return true;
-				}
-				else if (oRoomCell.getDoorDirection() == DoorDirection.LEFT && index == origin - 1) {
-					return true;
-				}
-				else if (oRoomCell.getDoorDirection() == DoorDirection.RIGHT && index == origin + 1) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return checkDoorDirection(getCell(index), getCell(origin));
 			}
-			
-			else {
-				return false;
-			}
-			
+			else { return false; }
+
 		}
 		else if (cells.get(index).isDoorway()) {
-			RoomCell iRoomCell = (RoomCell)cells.get(index);
 			if (cells.get(origin).isWalkway()) {
-				if (iRoomCell.getDoorDirection() == DoorDirection.UP && index == origin + numColumns) {
-					return true;
-				}
-				else if (iRoomCell.getDoorDirection() == DoorDirection.DOWN && index == origin - numColumns) {
-					return true;
-				}
-				else if (iRoomCell.getDoorDirection() == DoorDirection.LEFT && index == origin + 1) {
-					return true;
-				}
-				else if (iRoomCell.getDoorDirection() == DoorDirection.RIGHT && index == origin - 1) {
-					return true;
-				}
-				else {
-					return false;
-				}
-				
+				return checkDoorDirection(getCell(origin), getCell(index));
+
 			}
 			else {
 				return false;
@@ -262,10 +227,10 @@ public class Board {
 		else {
 			return false;
 		}
-		
+
 	}
-		
-		
+
+
 	public HashSet<Integer> getAdjList(int cell){
 		return adjMap.get(cell);
 
@@ -291,11 +256,13 @@ public class Board {
 					for(int adj : getAdjList(location)){
 						if(!visited[adj]){
 							if(getCell(adj).isDoorway()){
-								
-								targets.add(adj);
-							} else{
-								calcTargets(adj, steps-1);
+								if( checkDoorDirection(getCell(location), getCell(adj)) ){
+									targets.add(adj);
+								}
+								continue;
 							}
+							calcTargets(adj, steps-1);
+
 						}
 					}
 				}
@@ -307,6 +274,7 @@ public class Board {
 	}
 
 	//this function checks if from a given cell, if the given door can be entered from the direction
+	//returns true if the door can be used, otherwise false
 	public boolean checkDoorDirection(BoardCell current, BoardCell door){
 		if(!door.isDoorway()){ return false; }
 		else{
