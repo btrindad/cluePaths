@@ -488,6 +488,8 @@ public class Board {
 					for(int adj : getAdjList(location)){
 						if(!visited[adj]){
 							if(getCell(adj).isDoorway()){
+								
+								
 								targets.add(location);
 							} else{
 								calcTargets(adj, steps-1);
@@ -502,6 +504,21 @@ public class Board {
 		visited[location] = false;
 	}
 
+	//this function checks if from a given cell, if the given door can be entered from the direction
+	public boolean checkDoorDirection(BoardCell current, BoardCell door){
+		if(!door.isDoorway()){ return false; }
+		else{
+			int diff = calcIndex(current.row, current.column)-calcIndex(door.row, door.column);
+			//at this point we are guaranteed that door is actually a doorway, thus we are safe to cast as RoomCell
+			switch(((RoomCell) door).getDoorDirection()){
+			case UP: if( diff == (-1*numColumns) ){ return true; }else{ break; }
+			case DOWN: if( diff == numColumns ){ return true; } else{ break;}
+			case LEFT: if( diff == -1 ){ return true; } else{ break; }
+			case RIGHT: if( diff == 1 ){ return true; } else{ break; }
+			}
+			return false;
+		}
+	}
 
 	public Set<Integer> getTargets(){
 		return targets;

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
+import clueGame.RoomCell;
 
 public class BoardAdjTests {
 	private static Board board;
@@ -347,6 +348,25 @@ public class BoardAdjTests {
 		Assert.assertTrue(targets.contains(board.calcIndex(8, 11)));
 		Assert.assertTrue(targets.contains(board.calcIndex(7, 12)));
 		Assert.assertTrue(targets.contains(board.calcIndex(7, 10)));
+	}
+	
+	@Test
+	public void testCheckDoor()
+	{
+		//test right entry
+		Assert.assertTrue(board.checkDoorDirection(board.getCell(13, 5), board.getCell(13, 4)));
+		//test left entry
+		Assert.assertTrue(board.checkDoorDirection(board.getCell(12, 16), board.getCell(12, 17)));
+		//test up entry
+		Assert.assertTrue(board.checkDoorDirection(board.getCell(15, 10), board.getCell(16, 10)));
+		//test down entry
+		Assert.assertTrue(board.checkDoorDirection(board.getCell(7, 11), board.getCell(6, 11)));
+		
+		//test invalid entries
+		Assert.assertFalse(board.checkDoorDirection(board.getCell(8, 22), board.getCell(8, 21))); //if two walkways are given
+		Assert.assertFalse(board.checkDoorDirection(board.getCell(8, 22), board.getCell(7, 22))); //if a walkway and a room with no door are given
+		Assert.assertFalse(board.checkDoorDirection(board.getCell(5, 17), board.getCell(5, 18))); //a door next to another door
+		Assert.assertFalse(board.checkDoorDirection(board.getCell(5, 16), board.getCell(5, 17))); //a walkway that is on the wrong side of the door
 	}
 
 }
