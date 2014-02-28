@@ -258,7 +258,94 @@ public class Board {
 		//System.out.println("size of board: " + cells.size());
 		//if(index < 0 || index >= cells.size()){ return false; }
 
-		if(cells.get(origin).isRoom() && !cells.get(origin).isDoorway()) {
+		if (cells.get(index).isWalkway()) {
+			if (cells.get(origin).isWalkway()) {
+				return true;
+			}
+			else if (cells.get(origin).isDoorway()) {
+				RoomCell oRoomCell = (RoomCell)cells.get(origin);
+				if (oRoomCell.getDoorDirection() == DoorDirection.DOWN && index == origin + numColumns) {
+					return true;
+				}
+				else if (oRoomCell.getDoorDirection() == DoorDirection.UP && index == origin - numColumns) {
+					return true;
+				}
+				else if (oRoomCell.getDoorDirection() == DoorDirection.LEFT && index == origin - 1) {
+					return true;
+				}
+				else if (oRoomCell.getDoorDirection() == DoorDirection.RIGHT && index == origin + 1) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			/*else if (!cells.get(origin).isDoorway()) {
+				return false;
+			}*/
+			else {
+				return false;
+			}
+			
+		}
+		else if (cells.get(index).isDoorway()) {
+			RoomCell iRoomCell = (RoomCell)cells.get(index);
+			if (cells.get(origin).isWalkway()) {
+				if (iRoomCell.getDoorDirection() == DoorDirection.UP && index == origin + numColumns) {
+					return true;
+				}
+				else if (iRoomCell.getDoorDirection() == DoorDirection.DOWN && index == origin - numColumns) {
+					return true;
+				}
+				else if (iRoomCell.getDoorDirection() == DoorDirection.LEFT && index == origin + 1) {
+					return true;
+				}
+				else if (iRoomCell.getDoorDirection() == DoorDirection.RIGHT && index == origin - 1) {
+					return true;
+				}
+				else {
+					return false;
+				}
+				
+			}
+			else {
+				return false;
+			}
+		}
+		else if (cells.get(index).isRoom()) {
+			return false;
+		}
+		else {
+			return false;
+		}
+		
+	}
+		
+		/*
+		if (cells.get(index).isDoorway()) {
+			if (!cells.get(origin).isWalkway()) {
+				return false;
+			}
+			else {
+				RoomCell doorRoomCell = (RoomCell)cells.get(index);
+				if (doorRoomCell.getDoorDirection() == DoorDirection.LEFT && index == origin + 1) {
+					return true;
+				}
+				else if (doorRoomCell.getDoorDirection() == DoorDirection.RIGHT && index == origin - 1) {
+					return true;
+				}
+				else if (doorRoomCell.getDoorDirection() == DoorDirection.UP && index == origin + numColumns) {
+					return true;
+				}
+				else if (doorRoomCell.getDoorDirection() == DoorDirection.DOWN && index == origin - numColumns) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
+		else if(cells.get(origin).isRoom() && !cells.get(origin).isDoorway()) {
 			return false;
 		}else if (cells.get(index).isRoom() && !cells.get(index).isDoorway()) {
 			return false;
@@ -298,14 +385,15 @@ public class Board {
 			else {
 				return false;
 			}
-		}else if (cells.get(index).isWalkway()) {
+
+		}else if (cells.get(index).isWalkway() && !cells.get(index).isDoorway()) {
 			return true;
 		}
 		else {
 			return false;
 		}
 	}
-
+*/
 	/*
 	public boolean checkAdjacency(int index, int origin){
 		//first check that index is in bounds
