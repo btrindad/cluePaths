@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -170,7 +169,6 @@ public class Board {
 		return numColumns;
 	}
 
-	/* ------------------------------------------------- */
 	//logic from IntBoard class
 	public void calcAdjacencies() {
 		BoardCell current;
@@ -200,49 +198,6 @@ public class Board {
 				adjMap.put(calcIndex(current.row, current.column), adjList);
 
 			}
-
-
-			/*
-			//ArrayList<Integer> adjList = new ArrayList<Integer>();
-
-			//if i%numColumns == 0, increment row
-			if (i%numColumns == 0) {
-				adjList.add(i + 1);
-
-				if (i < (numRows*numColumns - numColumns)) {
-					adjList.add(i + numColumns);
-				}
-
-				if (i > 0) {
-					adjList.add(i - numColumns);
-				}
-			}
-			else if (i%numColumns > 0 && i%numColumns < (numColumns - 1)) {
-				adjList.add(i + 1);
-				adjList.add(i - 1);
-
-				if (i < (numRows*numColumns - numColumns)) {
-					adjList.add(i + numColumns);
-				}
-
-				if (i > 1) {
-					adjList.add(i - numColumns);
-				}
-			}
-			else if (i%numColumns == numColumns - 1) {
-				adjList.add(i - 1);
-
-				if (i < (numRows*numColumns - numColumns)) {
-					adjList.add(i + numColumns);
-				}
-
-				if (i > numColumns - 1) {
-					adjList.add(i - numColumns);
-				}
-			}
-
-			adjMap.put(i, adjList);
-			 */
 		}
 	}
 
@@ -362,6 +317,7 @@ public class Board {
 			case DOWN: if( diff == numColumns ){ return true; } else{ break;}
 			case LEFT: if( diff == -1 ){ return true; } else{ break; }
 			case RIGHT: if( diff == 1 ){ return true; } else{ break; }
+			default: break;
 			}
 			return false;
 		}
