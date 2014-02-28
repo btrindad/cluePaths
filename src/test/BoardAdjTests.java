@@ -198,12 +198,8 @@ public class BoardAdjTests {
 	// These are LIGHT BLUE on the planning spreadsheet
 	@Test
 	public void testTargetsOneStep() {
-		System.out.println("a list: " + board.getTargets());
 		board.startTargets(21, 6, 1);
 		Set<Integer> targets = board.getTargets();
-		System.out.println("Dah list: " + board.getTargets());
-		System.out.println(board.calcIndex(20, 6));
-		System.out.println(board.calcIndex(21, 5));
 		Assert.assertEquals(2, targets.size());
 		Assert.assertTrue(targets.contains(board.calcIndex(20, 6)));
 		Assert.assertTrue(targets.contains(board.calcIndex(21, 5)));	
@@ -219,14 +215,12 @@ public class BoardAdjTests {
 	@Test
 	public void testTargetsTwoSteps() {
 		board.startTargets(21, 6, 2);
-		System.out.println("target list 2-1: " + board.getTargets());
 		Set<Integer> targets= board.getTargets();
 		Assert.assertEquals(2, targets.size());
 		Assert.assertTrue(targets.contains(board.calcIndex(19, 6)));
 		Assert.assertTrue(targets.contains(board.calcIndex(20, 5)));
 		
 		board.startTargets(14, 0, 2);
-		System.out.println("target list 2-2: " + board.getTargets());
 		targets= board.getTargets();
 		Assert.assertEquals(1, targets.size());	
 		Assert.assertTrue(targets.contains(board.calcIndex(15, 1)));			
@@ -237,12 +231,7 @@ public class BoardAdjTests {
 	public void testTargetsFourSteps() {
 		board.startTargets(21, 6, 4);
 		Set<Integer> targets = board.getTargets();
-		System.out.println("target list 4: " + board.getTargets());
-		System.out.println(board.calcIndex(17, 6));
-		System.out.println(board.calcIndex(18, 5));
-		System.out.println(board.calcIndex(19, 6));
-		System.out.println(board.calcIndex(20, 5));
-		System.out.println(board.calcIndex(19, 5));
+		
 		Assert.assertEquals(4, targets.size());
 		Assert.assertTrue(targets.contains(board.calcIndex(17, 6)));
 		Assert.assertTrue(targets.contains(board.calcIndex(18, 5)));
@@ -262,15 +251,9 @@ public class BoardAdjTests {
 	@Test
 	public void testTargetsSixSteps() {
 		board.startTargets(6, 10, 6);
-		System.out.println("2, 10 adj: " + board.getAdjList(board.calcIndex(2, 10)));
 		
-		System.out.println("target list 6: " + board.getTargets());
 		Set<Integer> targets= board.getTargets();
-		System.out.println(board.calcIndex(0, 10));
-		System.out.println(board.calcIndex(2, 9));
-		System.out.println(board.calcIndex(6, 11));
-		System.out.println(board.getAdjList(33));
-		System.out.println(board.getAdjList(29));
+		
 		Assert.assertTrue(targets.contains(board.calcIndex(0, 10)));
 		Assert.assertTrue(targets.contains(board.calcIndex(6, 11)));	
 		Assert.assertTrue(targets.contains(board.calcIndex(6, 6)));
@@ -312,7 +295,6 @@ public class BoardAdjTests {
 	public void testTargetsIntoRoomShortcut() 
 	{
 		board.startTargets(8, 16, 4);
-		System.out.println();
 		Set<Integer> targets= board.getTargets();
 		Assert.assertEquals(18, targets.size());
 		
@@ -344,11 +326,8 @@ public class BoardAdjTests {
 	public void testRoomExit()
 	{
 		// Take one step, essentially just the adj list
-		System.out.println("WTF Test: " + board.getAdjList(board.calcIndex(6, 11)));
 		board.startTargets(6, 11, 1);
-		System.out.println("Exit: " + board.getTargets());
-		System.out.println(board.calcIndex(6, 11));
-		System.out.println(board.calcIndex(7, 11));
+		
 		Set<Integer> targets= board.getTargets();
 		//Set<Integer> adjList = board.getAdjList(board.calcIndex(6, 11));
 		// Ensure doesn't exit through the wall

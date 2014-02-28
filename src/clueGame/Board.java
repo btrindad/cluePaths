@@ -182,24 +182,20 @@ public class Board {
 
 				if((i - 1) >= 0 && checkAdjacency(calcIndex(i-1,j), calcIndex(i,j))){
 					adjList.add(calcIndex(i-1, j));
-					//System.out.println("adjList: " + i + "," + j + ": " + adjList);
+
 				}
 
 				if((i + 1) < numRows && checkAdjacency(calcIndex(i+1,j), calcIndex(i,j))){
 					adjList.add(calcIndex(i+1, j));
-					//System.out.println("adjList: " + i + "," + j + ": " + adjList);
 				}
 
 				if((j-1) >= 0 && checkAdjacency(calcIndex(i,j-1), calcIndex(i,j))){
 					adjList.add(calcIndex(i, j-1));
-					//System.out.println("adjList: " + i + "," + j + ": " + adjList);
 				}
 
 				if((j+1) < numColumns && checkAdjacency(calcIndex(i,j+1), calcIndex(i,j))){
 					adjList.add(calcIndex(i, j+1));
-					//System.out.println("adjList: " + i + "," + j + ": " + adjList);
 				}
-				//System.out.println("adjList: " + i + "," + j + ": " + adjList);
 
 				adjMap.put(calcIndex(current.row, current.column), adjList);
 
@@ -252,12 +248,7 @@ public class Board {
 
 
 	public boolean checkAdjacency(int index, int origin){
-		//System.out.println("numRows is: " + numRows);
-		//System.out.println("numColumns is: " + numColumns);
-		//System.out.println("calcIndex returns: " + calcIndex(numRows, numColumns));
-		//System.out.println("size of board: " + cells.size());
-		//if(index < 0 || index >= cells.size()){ return false; }
-
+		
 		if (cells.get(index).isWalkway()) {
 			if (cells.get(origin).isWalkway()) {
 				return true;
@@ -280,9 +271,7 @@ public class Board {
 					return false;
 				}
 			}
-			/*else if (!cells.get(origin).isDoorway()) {
-				return false;
-			}*/
+			
 			else {
 				return false;
 			}
@@ -321,148 +310,7 @@ public class Board {
 		
 	}
 		
-		/*
-		if (cells.get(index).isDoorway()) {
-			if (!cells.get(origin).isWalkway()) {
-				return false;
-			}
-			else {
-				RoomCell doorRoomCell = (RoomCell)cells.get(index);
-				if (doorRoomCell.getDoorDirection() == DoorDirection.LEFT && index == origin + 1) {
-					return true;
-				}
-				else if (doorRoomCell.getDoorDirection() == DoorDirection.RIGHT && index == origin - 1) {
-					return true;
-				}
-				else if (doorRoomCell.getDoorDirection() == DoorDirection.UP && index == origin + numColumns) {
-					return true;
-				}
-				else if (doorRoomCell.getDoorDirection() == DoorDirection.DOWN && index == origin - numColumns) {
-					return true;
-				}
-				else {
-					return false;
-				}
-			}
-		}
-		else if(cells.get(origin).isRoom() && !cells.get(origin).isDoorway()) {
-			return false;
-		}else if (cells.get(index).isRoom() && !cells.get(index).isDoorway()) {
-			return false;
-		}
-		else if (index == (origin + numColumns) && cells.get(index).isRoom()) {
-			RoomCell tRC = (RoomCell)cells.get(index);
-			if (tRC.getDoorDirection() == DoorDirection.UP) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		else if (index == (origin - numColumns) && cells.get(index).isRoom()) {
-			RoomCell tRC = (RoomCell)cells.get(index);
-			if (tRC.getDoorDirection() == DoorDirection.DOWN) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		else if (index == (origin + 1) && cells.get(index).isRoom()) {
-			RoomCell tRC = (RoomCell)cells.get(index);
-			if (tRC.getDoorDirection() == DoorDirection.LEFT) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		else if (index == (origin - 1) && cells.get(index).isRoom()) {
-			RoomCell tRC = (RoomCell)cells.get(index);
-			if (tRC.getDoorDirection() == DoorDirection.RIGHT) {
-				return true;
-			}
-			else {
-				return false;
-			}
-
-		}else if (cells.get(index).isWalkway() && !cells.get(index).isDoorway()) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-*/
-	/*
-	public boolean checkAdjacency(int index, int origin){
-		//first check that index is in bounds
-		if (index < 0 || index >= cells.size()) {
-			return false;
-		}
-
-		//in this version, movement in rooms is not allowed, therefore any room that is not
-		//a doorway has no adjacent spaces
-		if(getCell(index).isRoom() && !getCell(index).isDoorway()){	return false; }
-		else if (getCell(origin).isRoom() && !getCell(index).isDoorway()){ return false; }
-
-		//check first possibility, that origin is a walkway
-		else if (getCell(origin).isWalkway()){
-			//allow stepping from walkway to walkway
-			if(getCell(index).isWalkway()){ return true; }
-			//if we are stepping from walkway to doorway, we first check the direction
-			if(getCell(index).isDoorway()){
-				RoomCell current = (RoomCell) getCell(index);
-				switch (current.getDoorDirection()){
-				case UP: if((index-numColumns) == origin){ return true; }
-				break;
-				case DOWN: if((index+numColumns) == origin){ return true; }
-				break;
-				case LEFT: if((index-1)==origin && (index%numColumns != 0)){ return true; }
-				break;
-				case RIGHT: if((index+1)==origin && ((index+1)%numColumns != 0)){ return true; }
-				break;
-				default: return false;
-				}
-			}
-			else return false;
-		}
-		//finally if we are stepping from a doorway
-		else if (getCell(origin).isDoorway()){
-			//from door to floor is always alright
-			if(getCell(index).isWalkway()){
-				RoomCell current = (RoomCell) getCell(origin);
-				switch (current.getDoorDirection()){
-				case UP: if((origin-numColumns) == index){ return true; }
-				break;
-				case DOWN: if((origin+numColumns) == index){ return true; }
-				break;
-				case LEFT: if((origin-1)==index && (origin%numColumns != 0)){ return true; }
-				break;
-				case RIGHT: if((origin+1)==index && ((origin+1)%numColumns != 0)){ return true; }
-				break;
-				default: return false;
-				}
-			}
-			//in this version, we stop at the doorway. thus we never step from
-			//doorway to room, and we will never step from doorway to doorway
-			else { return false; }
-		}
-		//ever the pessimist, if we cannot determine that two cells are connected
-		//we will act as though they are not
-		return false;
-	}*/
-
-
-
-
-	//filler to prevent errors until implemented
-
-	//rrayList<Integer> tempAdjList = adjMap.get(cell);
-	//LinkedList<Integer> adjLinkList = new LinkedList<Integer>(tempAdjList);
-	//return adjLinkList;
-	//LinkedList<Integer> adjLinkList = new LinkedList<Integer>();
-	//return adjLinkList;
+		
 	public HashSet<Integer> getAdjList(int cell){
 		return adjMap.get(cell);
 
